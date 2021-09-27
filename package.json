@@ -1,7 +1,6 @@
 {
   "name": "noteit",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "nodemon backend/server.js",
@@ -15,5 +14,14 @@
     "mongoose": "^6.0.7",
     "moongoose": "^0.0.4",
     "nodemon": "^2.0.13"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KshitijSabale/NoteIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KshitijSabale/NoteIt/issues"
+  },
+  "homepage": "https://github.com/KshitijSabale/NoteIt#readme",
+  "description": ""
 }
