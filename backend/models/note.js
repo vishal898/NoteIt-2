@@ -23,12 +23,6 @@ const noteSchema = new Schema({
 		type: Date,
 		required: true,
 	},
-    // ankiVars:[{
-    //     quality:Number,
-    //     repetations:Number,
-    //     prevEaseFactor:Number,
-    //     prevInterval:Number,
-    // }],
     tags:[
         {
             type:Schema.Types.ObjectId,
