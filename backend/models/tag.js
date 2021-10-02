@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const tagSchema = new Schema({
     tagName:{
-        String,
+        type:String,
         required:true,
     },
     notes:[
@@ -16,6 +16,6 @@ const tagSchema = new Schema({
 });
 
 
-const Tag = mongoose.model('Tag',userSchema);
+const Tag = mongoose.model('Tag',tagSchema);
 
 module.exports = Tag ;
