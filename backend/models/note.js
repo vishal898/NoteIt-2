@@ -8,6 +8,7 @@ const noteSchema = new Schema({
         ref:'User',
     },
     
+
     url:{
 		type: String,
 		required: true,
