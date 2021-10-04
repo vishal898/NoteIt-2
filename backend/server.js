@@ -5,18 +5,21 @@ const Note = require('./models/note')
 const Tag = require('./models/tag')
 const User = require('./models/user')
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+const dbConnection = require("./config/dbconnect");
+ const mongoose = require('mongoose');
+
+ dbConnection.db();
 
 dotenv.config({ path: './config.env' });
 
-const DB  = process.env.DB;
+// const DB  = process.env.DB;
 const PORT = process.env.PORT;
 
-mongoose.connect(DB).then(()=>{
-    console.log('connected to database');
-}).catch((err)=>{
-    console.log('failed to connect');
-})
+// mongoose.connect(DB).then(()=>{
+//     console.log('connected to database');
+// }).catch((err)=>{
+//     console.log('failed to connect');
+// })
 
 
 

@@ -7,6 +7,7 @@ const noteSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'User',
     },
+    
     url:{
 		type: String,
 		required: true,
