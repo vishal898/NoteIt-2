@@ -13,7 +13,7 @@ const dbConnection = require("./config/dbconnect");
 dotenv.config({ path: './config.env' });
 
 // const DB  = process.env.DB;
-const PORT = process.env.PORT;
+
 
 // mongoose.connect(DB).then(()=>{
 //     console.log('connected to database');
