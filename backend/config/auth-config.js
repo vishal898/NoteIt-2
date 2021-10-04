@@ -46,3 +46,7 @@ module.exports = (passport) => {
 		)
 	);
 };
+
+dotenv.config({ path: './config.env' });
+const CLIENTID = process.env.CLIENTID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
