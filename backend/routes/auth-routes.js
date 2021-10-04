@@ -43,8 +43,8 @@
 
 // module.exports = router;
 
-const router=require('exprress').Router();
+const router=require('express').Router();
 
 //auth-login
 
-router.get('/login')
+router.get('/login');
