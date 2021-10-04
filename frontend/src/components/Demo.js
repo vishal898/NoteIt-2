@@ -12,7 +12,7 @@ export default function Demo() {
     },[])
     return (
         <div>
-            <h1>dsfdf</h1>
+            <h1>hello world</h1>
         </div>
     )
 }
