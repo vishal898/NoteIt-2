@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//comment
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
@@ -7,8 +6,6 @@ const noteSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'User',
     },
-    
-
     url:{
 		type: String,
 		required: true,

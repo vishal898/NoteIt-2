@@ -6,26 +6,16 @@ const Tag = require('./models/tag')
 const User = require('./models/user')
 const dotenv = require('dotenv');
 const dbConnection = require("./config/dbconnect");
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const router = express.Router();
 
- dbConnection.db();
-
+dbConnection.db();
 dotenv.config({ path: './config.env' });
-
-// const DB  = process.env.DB;
-
-
-// mongoose.connect(DB).then(()=>{
-//     console.log('connected to database');
-// }).catch((err)=>{
-//     console.log('failed to connect');
-// })
-
-
-
+const PORT  = process.env.PORT;
 app.use(express.json());
-
 app.use(cors());
+
+
 
 app.get('/',(req,res)=>{
     res.send('API IS RUNNING');

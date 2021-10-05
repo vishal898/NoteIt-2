@@ -43,9 +43,33 @@
 
 // module.exports = router;
 
-const router=require('express').Router();
 
-//auth-login
+const express = require("express");
+const passport = require("passport");
+const router = express.Router();
 
-router.get('/login');
-//hi
+router.get(
+	"/google",
+	passport.authenticate("google", {
+		scope: ["profile", "email"],
+	})
+);
+router.get(
+	"/google/callback",
+	passport.authenticate("google", {
+		failureRedirect: "http://localhost:3000/bad",
+	}),
+	function (req, res) {
+		// Successful authentication, redirect home.
+		console.log("req.user [success]", req.user);
+		res.redirect("http://localhost:3000/main");
+	}
+);
+
+router.get("/logout", (req, res) => {
+	req.session = null;
+	req.logout();
+	res.redirect("http://localhost:3000");
+});
+
+module.exports = router;
