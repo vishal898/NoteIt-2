@@ -1,15 +1,19 @@
 import Navbar from '../../Components/Navbar/Navbar';
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
+import './Create.css';
 const Create = () => {
   return (
     <>
     <Navbar/>
-   
+   <div className="central">
     <div className="container">
     
-      <h1 className="text-center" style={{paddingTop: "30%"}}>
-        Create note
-      </h1>
       
+        <SimpleMDE/>
+      
+      
+    </div>
     </div>
     </>
   )

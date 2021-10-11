@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import {BsPersonFill} from "react-icons/bs";
-
+import { ReactComponent as Icon } from "../../NoteSVG.svg";
 
 import { NavLink } from "react-router-dom";
 
@@ -11,14 +11,17 @@ const Navbar = () => {
   return (
     <>
       <nav className="main-nav">
-      <img src={require("./noteIcon.png")} width="10px" height="10px" alt="icon" ></img>
+        <div className="Icon">
+        <Icon style={{"height":"80","justify-content":"start","align-items": "center","width":"80"}} />
+        </div>
         {/* 1st logo part  */}
         <div className="logo">
-        
-          <h2>
+
+          <h1>
+          
             <span>N</span>ote
             <span>I</span>t
-          </h2>
+          </h1>
         </div>
 
         {/* 2nd menu part  */}
@@ -39,9 +42,10 @@ const Navbar = () => {
             <li>
               <NavLink to="/create">create</NavLink>
             </li>
-            <li>        <a href="#">
+            <li> <NavLink to="/user">
                 < BsPersonFill/>
-              </a></li>
+                </NavLink>
+            </li>
             
           </ul>
         </div>
