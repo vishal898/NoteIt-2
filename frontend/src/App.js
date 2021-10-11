@@ -29,6 +29,9 @@ const App=()=> {
     <Route exact path="/create">
       <Create/>
     </Route>
+    <Route exact path="/user">
+     <User/>
+    </Route>
   </Switch>
   );
 }
