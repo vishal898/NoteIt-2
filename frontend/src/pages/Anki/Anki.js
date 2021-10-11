@@ -1,11 +1,11 @@
-//import Navbar from './Components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar/Navbar';
 const Anki = () => {
   return (
     <>
-    {/* <Navbar/> */}
+    <Navbar/>
     <section className="hero-section">
       <p>Welcome to </p>
-      <h1>Thapa Technical Service Page</h1>
+      <h1>Anki</h1>
     </section>
   </>
 );

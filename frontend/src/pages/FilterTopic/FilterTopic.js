@@ -1,7 +1,8 @@
-//import Navbar from './Components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar/Navbar';
 const FilterTopic = () => {
   return (
     <>
+    <Navbar/>
    
     <div className="container">
   

@@ -53,15 +53,7 @@ const Navbar = () => {
         
 
 
-      </nav>
-         <section className="hero-section">
-        <p>Welcome to </p>
-        <h1>NoteIT</h1>
-      </section> 
-
-
-
-     
+      </nav>     
     </>
   );
 };

@@ -1,7 +1,8 @@
-//import Navbar from './Components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar/Navbar';
 const Create = () => {
   return (
     <>
+    <Navbar/>
    
     <div className="container">
     
