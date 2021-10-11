@@ -28,7 +28,9 @@ const noteSchema = new Schema({
             ref:'Tag',
         },
     ],
-    vistCnt:Number,
+    visitCnt:{
+        type:Number,
+    }
 });
 
 
