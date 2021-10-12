@@ -23,7 +23,7 @@
 }
 .yourtag {
   margin-top: 50px;
-  color: rgb(62, 59, 245);
+  color: rgb(41, 14, 66);
   font-size: 20px;
 }
 
@@ -52,16 +52,17 @@ a:hover {
 }
 
 .buttonhome {
-  background-color: #fa8888d5;
-  color: rgb(119, 107, 107);
+  background-color: #1c1852d5;
+  color: rgb(255, 248, 248);
   text-align: center;
   cursor: pointer;
   width: 20%;
   margin-left: 40%;
   height: 40px;
+  width: 40px;
   margin-top: 4px;
   margin-bottom: 10px;
-  border-radius: 40%;
+  border-radius: 50%;
   display: block;
 }
 
