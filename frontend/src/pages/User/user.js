@@ -1,13 +1,15 @@
+import React from 'react';
+
 import Navbar from '../../Components/Navbar/Navbar';
 import Menu from './menuApi';
-import React from 'react';
+
 import './user.css';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 const User = () => {
 
   const [menuData, setMenuData] = React.useState(Menu);
   const largerThanSixty = Menu.filter( number => {
-    return number.googleID == "vishalg"
+    return number.googleID ==="vishalg"
   })
 
   return (
@@ -25,11 +27,11 @@ const User = () => {
           <h2 className="yourtag">Your Tags</h2>
           <p className="tags">{ largerThanSixty.map(number => <li>{number.tags.toString()}</li>) }</p>
 
-          <p><button>Logout</button></p>
+          <p><button className="loginbutton">Logout</button></p>
         </div>
        
       </div>
     </>
-  )
+  );
 }
 export default User;

@@ -11,7 +11,7 @@ const Create = () => {
    <div className="central">
     <div className="container">
     
-    <div class="title" id="titleid">
+    <div className="title" id="titleid">
         <TextField id="titlefield" placeholder="Title Here"></TextField>
         </div>
         <Button variant="cta">Save</Button>
