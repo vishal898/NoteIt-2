@@ -20,11 +20,23 @@
 .central {
   align-items: center;
 }
-/* #titlefield {
+
+.save {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.save button {
+  color: #ffffff;
+  background-color: #180a4b;
+  margin-bottom: 10%;
+  font-size: 10pt;
+}
+#titlefield {
+  grid-column: 1/8;
   float: left;
-  width: 100%;
-  height: 40px;
-  padding: 1px;
+  height: 30px;
+  width: 70%;
   resize: none;
   font-size: 13pt;
-} */
+  margin-bottom: 1%;
+}

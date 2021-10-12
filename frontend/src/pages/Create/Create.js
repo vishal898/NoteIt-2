@@ -2,7 +2,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import './Create.css';
-import {Button} from '@react-spectrum/button';
+// import {Button} from '@react-spectrum/button';
 import {TextField} from '@react-spectrum/textfield';
 const Create = () => {
   return (
@@ -10,11 +10,12 @@ const Create = () => {
     <Navbar/>
    <div className="central">
     <div className="container">
-    
+    <div className="save">
     <div className="title" id="titleid">
-        <TextField id="titlefield" placeholder="Title Here"></TextField>
+        <textarea id="titlefield" placeholder="Title Here"></textarea>
         </div>
-        <Button variant="cta">Save</Button>
+        <button >Save</button>
+        </div>   
         <SimpleMDE/>
       
       
