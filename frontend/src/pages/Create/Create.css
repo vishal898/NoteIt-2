@@ -20,3 +20,11 @@
 .central {
   align-items: center;
 }
+/* #titlefield {
+  float: left;
+  width: 100%;
+  height: 40px;
+  padding: 1px;
+  resize: none;
+  font-size: 13pt;
+} */

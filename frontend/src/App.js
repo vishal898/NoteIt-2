@@ -10,12 +10,19 @@ import Home from './pages/Home/Home';
 import Anki from './pages/Anki/Anki';
 import FilterTopic from './pages/FilterTopic/FilterTopic';
 import User from './pages/User/user';
+import Glogin from './pages/Glogin/Glogin'
 
 
 const App=()=> {
   return (
+    <>
+    
     <Switch>
     <Route exact path="/">
+      <Glogin/>
+      </Route>  
+      
+    <Route exact path="/home">
       <Home />
     </Route>
 
@@ -34,6 +41,7 @@ const App=()=> {
      <User/>
     </Route>
   </Switch>
+  </>
   );
 }
 
