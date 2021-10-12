@@ -1,5 +1,6 @@
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  box-shadow: 0 8px 16px 0 rgba(49, 51, 189, 0.685);
   max-width: 300px;
   margin-top: 5%;
   margin-left: 40%;
@@ -7,6 +8,8 @@
   text-align: center;
   font-family: arial;
   padding-top: 20px;
+
+  border-color: rgb(81, 72, 133);
 }
 
 .title {
