@@ -21,7 +21,7 @@ module.exports = (passport) => {
 			},
 			function (accessToken, refreshToken, profile, cb) {
 				//
-
+				console.log(profile);
 				User.findOne({ googleID: profile.id }, async (err, user) => {
 					if (err) throw err;
 
@@ -31,7 +31,7 @@ module.exports = (passport) => {
 						cb(null, user);
 					} else {
 						const newUser = new User({
-							// googleID: profile.id,
+							googleID: profile.id,
 							email: profile.emails[0].value,
 							username: profile.displayName,
 							// phoneNo: null,
