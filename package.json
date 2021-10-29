@@ -2,6 +2,10 @@
   "name": "noteit",
   "version": "1.0.0",
   "main": "server.js",
+  "enhines":{
+    "node":"14.x",
+    "npm":"7.x"
+  },
   "scripts": {
     "start": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
