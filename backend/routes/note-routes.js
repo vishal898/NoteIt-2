@@ -53,4 +53,71 @@ router.post('/deleteNote',(req,res)=>{
 
 });
 
+
+router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
+
+      let repetitionn; 
+      let previousEaseFactorn;
+      let previousIntervaln; 
+      var id = req.params.idA;
+      Note.findById(id, (err, notes)=> {
+      if (err){
+        console.log(err);
+
+      }
+      else{
+        console.log("Result : ", notes);
+
+        repetitionn=notes.repetitions;
+        previousEaseFactorn=notes.previousEaseFactor;
+        previousIntervaln=notes.previousInterval;
+      }
+     
+      
+       let quality=req.params.qualityA; // take from frontend 
+       let easeFactor;
+       let interval;
+       
+
+       if(quality>=3)
+       {
+           if(repetitionn==0)
+               interval=1;
+           else if(repetitionn==1)
+               interval=6;
+           else if(repetitionn>1)
+               interval=previousIntervaln * previousEaseFactorn;
+           interval=Math.round(interval);
+           repetitionn++;
+           easeFactor=previousEaseFactorn* (0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))
+       }
+       else if(quality<3)
+       {
+           repetitionn=0;
+           interval=1;
+           easeFactor=previousEaseFactorn;
+       }
+       
+       if(easeFactor<1.3)
+           easeFactor=1.3;
+       
+       console.log(interval);
+    
+        notes.repetition=repetitionn;
+        notes.previousInterval=interval;
+        notes.previousEaseFactor=easeFactor;
+
+        Note.save(err => {
+        if (err) {
+  
+          res.send(err);
+        }
+        res.json({message: 'Updated '});
+      });
+  
+    });
+  });
+
+
+
 module.exports = router ;
