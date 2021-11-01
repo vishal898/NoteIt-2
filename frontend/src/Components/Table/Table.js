@@ -33,6 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables(props) {
   
   const notes = props.notes;
+
   // console.log(notes[0].difficulty);
   return (
     <>

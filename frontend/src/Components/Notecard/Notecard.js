@@ -29,7 +29,7 @@ export default function Notecard() {
     setUser(profile.data);
     setLoading(false);
   }, []);
-  let username="sweety";
+  let username="I am the initial value. Erase me, or try the button above.\nsweety\nbnbnmbn\n> sjjhnjnxjksxnasjkxjksbxxjkb\n> jlnnjknk\n# jkjkljkljkljkljkl\n### jkljkljkljkljk\n\n\n```\nnlknklnknk\nkljlkjk\n```";
   
 
   if (isLoading) return "Loading...";
@@ -65,6 +65,7 @@ export default function Notecard() {
      //   onChange={this.handleChange}
      //   value={this.state.textValue}
 
+     value={username}
          options={{
           
          autofocus: true,
@@ -74,7 +75,7 @@ export default function Notecard() {
              delay: 1000,
              uniqueId: 'note'
          },
-         //initialValue:{username},
+         
          showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
 
 }}
