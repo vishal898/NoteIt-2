@@ -20,14 +20,11 @@ module.exports = (passport) => {
 				callbackURL: "http://localhost:5000/google/callback",
 			},
 			function (accessToken, refreshToken, profile, cb) {
-				//
 				console.log(profile);
 				User.findOne({ googleID: profile.id }, async (err, user) => {
 					if (err) throw err;
-
-					//
+					
 					if (user) {
-						//
 						cb(null, user);
 					} else {
 						const newUser = new User({
@@ -38,7 +35,6 @@ module.exports = (passport) => {
 							// username: null,
 						});
 						await newUser.save();
-						//
 						cb(null, newUser);
 					}
 				});

@@ -1,6 +1,7 @@
 import Navbar from '../../Components/Navbar/Navbar';
 import Notecard from '../../Components/Notecard/Notecard';
 
+import Demo from '../../Components/Demo';
 const Home = () => {
   return (
     <>
@@ -9,6 +10,7 @@ const Home = () => {
       <p>Welcome to </p>
       <h1>NoteIt</h1>
       <Notecard/>
+      <Demo></Demo>
     </section>
   </>
   )

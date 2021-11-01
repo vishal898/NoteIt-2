@@ -14,12 +14,11 @@ const Tag = require('./models/tag');
 const User = require('./models/user');
 const mongoose = require('mongoose');
 
-
-// const router = express.Router();
 const noteRoutes = require('./routes/note-routes');
 
 
 dbConnection.db();
+
 dotenv.config({ path: './config.env' });
 const PORT  = process.env.PORT;
 var corsOptions={origin:'http://localhost:3000',credentials:true}
