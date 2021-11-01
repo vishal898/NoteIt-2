@@ -30,7 +30,28 @@ const noteSchema = new Schema({
     ],
     visitCnt:{
         type:Number,
+    },
+
+
+
+    //vishal
+    ankiOn:{
+        type:Boolean,
+    },
+    repetitions:{
+        type:Number,
+        //0
+    },
+    previousEaseFactor:{
+        type:Number,
+        //2.5
+    },
+    previousInterval:{
+        type:Number,
+        //0
     }
+    //
+
 });
 
 
