@@ -1,12 +1,15 @@
 .card {
   display: block;
   box-shadow: 0 8px 16px 0 rgba(49, 51, 189, 0.685);
-  max-width: 300px;
+
   margin-top: 5%;
-  margin-left: 40%;
+  height: max-content;
+  width: max-content;
+
   background-color: rgb(241, 236, 255);
   text-align: center;
   font-family: arial;
+
   padding-top: 20px;
 
   border-color: rgb(81, 72, 133);
@@ -46,7 +49,7 @@
 a {
   text-decoration: none;
   font-size: 22px;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 button:hover,
@@ -60,7 +63,8 @@ a:hover {
   text-align: center;
   cursor: pointer;
   width: 20%;
-  margin-left: 40%;
+
+  margin-left: 47%;
   height: 40px;
   width: 40px;
   margin-top: 4px;
@@ -71,4 +75,10 @@ a:hover {
 
 .username {
   margin-top: 10px;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -15,8 +15,22 @@ const Create = () => {
         <textarea id="titlefield" placeholder="Title Here"></textarea>
         </div>
         <button >Save</button>
-        </div>   
-        <SimpleMDE/>
+        </div>  
+        <SimpleMDE
+  
+  options={{
+    autofocus: true,
+    spellChecker: false,
+    autosave: {
+      enabled: true,
+      delay: 1000,
+      uniqueId: 'note'
+  },
+  showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
+   
+  }}
+/>
+        
       
       
     </div>

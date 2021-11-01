@@ -52,5 +52,14 @@ router.post('/updateNote',(req,res)=>{
 router.post('/deleteNote',(req,res)=>{
 
 });
+router.get("/getTags",(req,res)=>{  
+	const UID = req.user._id ;
+    // console.log(req.user);
+    // const UID = req.params.ID;
+	User.findById({_id:UID},(err,data)=>{
+        if(err)throw error;
+        res.json(data.tags);
+    });
+});
 
 module.exports = router ;

@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const User = require("../models/user");
 router.get(
 	"/google",
 	passport.authenticate("google", { scope: ["profile", "email"] })
@@ -16,8 +17,8 @@ const isLoggedIn = (req, res, next) => {
 	}
 };
 router.get("/me", (req, res) => {
-	//
 	res.json({ user: req.user });
+	console.log(req.user)
 });
 router.get(
 	"/google/callback",
@@ -27,9 +28,35 @@ router.get(
 	function (req, res) {
 		// Successful authentication, redirect home.
 		
-		res.redirect("http://localhost:3000");
+		res.redirect("http://localhost:3000/home");
 	}
 );
+// router.get("/profile", function (req, res) {
+// 	User.findOne({ email: req.session.passport.user.email })
+// 	  .lean()
+// 	  .exec((err, user) => {
+// 		if (err) console.log(err);
+// 		if (user) res.status(200).send(user);
+// 		else {
+// 		  res.status(404).send();
+// 		}
+// 	  });
+//   });
+  router.get("/profile", (req, res)=> {
+	console.log(req.user);
+	res.status(200).json(req.user);
+	// User.findOne({ email: req.session.passport.user.email })
+	//   .lean()
+	//   .exec((err, user) => {
+	// 	  console.log(req.session.passport.user);
+	// 	  res.status(200).send(req.session.passport.user);
+	// 	// if (err) console.log(err);
+	// 	// if (user) res.status(200).send(user);
+	// 	// else {
+	// 	//   res.status(404).send();
+	// 	// }
+	//   });
+});
 
 router.get("/logout", (req, res) => {
 	// req.session = null;

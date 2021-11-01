@@ -22,9 +22,13 @@ const noteRoutes = require('./routes/note-routes');
 dbConnection.db();
 dotenv.config({ path: './config.env' });
 const PORT  = process.env.PORT;
+var corsOptions={origin:'http://localhost:3000',credentials:true}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors(corsOptions));
+
+
+
 
 // Making cookie session
 app.use(
@@ -42,7 +46,6 @@ app.use(
 		}),
 	})
 );
-
 // initialising session from passport
 app.use(passport.initialize());
 app.use(passport.session());
