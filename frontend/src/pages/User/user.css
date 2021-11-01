@@ -1,0 +1,84 @@
+.card {
+  display: block;
+  box-shadow: 0 8px 16px 0 rgba(49, 51, 189, 0.685);
+
+  margin-top: 5%;
+  height: max-content;
+  width: max-content;
+
+  background-color: rgb(241, 236, 255);
+  text-align: center;
+  font-family: arial;
+
+  padding-top: 20px;
+
+  border-color: rgb(81, 72, 133);
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+  padding-top: 6px;
+}
+
+.tags {
+  margin-top: 1px;
+  color: rgb(64, 129, 116);
+  font-size: 19px;
+  padding: 2px;
+}
+.yourtag {
+  margin-top: 50px;
+  color: rgb(41, 14, 66);
+  font-size: 20px;
+}
+
+.loginbutton {
+  border: none;
+  outline: 0;
+  display: inline-block;
+
+  color: white;
+  background-color: rgb(51, 61, 61);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 50px;
+  font-size: 18px;
+}
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+.buttonhome {
+  background-color: #1c1852d5;
+  color: rgb(255, 248, 248);
+  text-align: center;
+  cursor: pointer;
+  width: 20%;
+
+  margin-left: 47%;
+  height: 40px;
+  width: 40px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.username {
+  margin-top: 10px;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

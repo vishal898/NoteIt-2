@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Note = require('../models/note');
+const User = require('../models/user');
 
 // demo
 router.get('/',(req,res)=>{
@@ -9,10 +10,11 @@ router.get('/',(req,res)=>{
 });
 
 // get read 
-router.get('/getAllNotes',(req,res)=>{
+router.get('/getAllNotes',async(req,res)=>{
     Note.find({ },(err,data)=>{
         if(err)throw error;
         res.json(data);
+        // console.log(data);
     });
 });
 
@@ -43,14 +45,28 @@ router.post('/createNote/:userId',(req,res)=>{
     newNote.save();
 });
 
+
 // post update 
 router.post('/updateNote',(req,res)=>{
 
 });
 
 // post delete 
-router.post('/deleteNote',(req,res)=>{
+router.post('/deleteNote/:noteId',(req,res)=>{
+    Note.findOneAndDelete({_id:url},(err,data)=>{
+        if(err)throw error;
+        res.json(data);
+    });
+});
 
+router.get("/getTags",(req,res)=>{  
+	const UID = req.user._id ;
+    console.log(req.user.tags);
+    // const UID = req.params.ID;
+	User.findById({_id:UID},(err,data)=>{
+        if(err)throw error;
+        res.json(data.tags);
+    });
 });
 
 

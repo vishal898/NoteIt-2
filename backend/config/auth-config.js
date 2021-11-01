@@ -20,25 +20,21 @@ module.exports = (passport) => {
 				callbackURL: "http://localhost:5000/google/callback",
 			},
 			function (accessToken, refreshToken, profile, cb) {
-				//
-
+				console.log(profile);
 				User.findOne({ googleID: profile.id }, async (err, user) => {
 					if (err) throw err;
-
-					//
+					
 					if (user) {
-						//
 						cb(null, user);
 					} else {
 						const newUser = new User({
-							// googleID: profile.id,
+							googleID: profile.id,
 							email: profile.emails[0].value,
 							username: profile.displayName,
 							// phoneNo: null,
 							// username: null,
 						});
 						await newUser.save();
-						//
 						cb(null, newUser);
 					}
 				});
@@ -47,6 +43,6 @@ module.exports = (passport) => {
 	);
 };
 
-dotenv.config({ path: './config.env' });
-const CLIENTID = process.env.CLIENTID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+// dotenv.config({ path: './config.env' });
+// const CLIENTID = process.env.CLIENTID;
+// const CLIENT_SECRET = process.env.CLIENT_SECRET;
