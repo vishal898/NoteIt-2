@@ -17,8 +17,6 @@ const Create = () => {
         <button >Save</button>
         </div>   
         <SimpleMDE/>
-      
-      
     </div>
     </div>
     </>
