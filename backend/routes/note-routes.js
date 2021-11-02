@@ -30,6 +30,22 @@ router.get('/getNote/:url',(req,res)=>{
 });
 
 
+// // get by nodeid
+// router.get('/getNote/:idA',(req,res)=>{
+//       let id = req.params.idA;
+//       console.log(id);
+//       Note.findById(id, (err, notes)=> {
+//       if (err){
+//         console.log(err);
+
+//       }
+//       else{
+//         console.log("Result : ", notes);
+//         res.json(notes);
+//       }
+// });
+
+
 // post create 
 router.post('/createNote/:userId',(req,res)=>{
     const {url,difficulty,title,createdTime,tags} = req.body;
@@ -49,9 +65,27 @@ router.post('/createNote/:userId',(req,res)=>{
 
 
 // post update 
-router.post('/updateNote',(req,res)=>{
+// router.post('/updateNote/:idA',(req,res)=>{
 
-});
+//     const {url,difficulty,title,createdTime,tags,body} = req.body;
+//       let id = req.params.idA;
+//       console.log(id);
+//       Note.findById(id, (err, notes)=> {
+//       if (err){
+//         console.log(err);
+//       }
+//       else{
+//         console.log("Result : ", notes);
+
+//         notes.body=body;
+//         notes.tags=tags;
+//         // all other atribute 
+//        notes.save();
+//        res.send("sucess");
+//      }
+//     });
+// });
+
 
 // post delete 
 router.post('/deleteNote/:noteId',(req,res)=>{
@@ -80,7 +114,8 @@ router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
       let repetitionn; 
       let previousEaseFactorn;
       let previousIntervaln; 
-      var id = req.params.idA;
+      let id = req.params.idA;
+      console.log(id);
       Note.findById(id, (err, notes)=> {
       if (err){
         console.log(err);
@@ -92,13 +127,13 @@ router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
         repetitionn=notes.repetitions;
         previousEaseFactorn=notes.previousEaseFactor;
         previousIntervaln=notes.previousInterval;
-      }
+      
      
       
        let quality=req.params.qualityA; // take from frontend 
        let easeFactor;
        let interval;
-       
+       console.log(quality);
 
        if(quality>=3)
        {
@@ -124,17 +159,15 @@ router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
        
        console.log(interval);
     
-        notes.repetition=repetitionn;
+        notes.repetitions=repetitionn;
         notes.previousInterval=interval;
         notes.previousEaseFactor=easeFactor;
 
-        Note.save(err => {
-        if (err) {
-  
-          res.send(err);
-        }
-        res.json({message: 'Updated '});
-      });
+        notes.save();
+
+       res.send("sucess");
+      
+     }
   
     });
   });
