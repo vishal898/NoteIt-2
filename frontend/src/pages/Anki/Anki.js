@@ -4,12 +4,13 @@ const Anki = () => {
   return (
     <>
     <Navbar/>
+    
     <section className="hero-section">
       
-      
       <AnkiDemo/>
+      </section>
       
-    </section>
+    
   </>
   )
 }

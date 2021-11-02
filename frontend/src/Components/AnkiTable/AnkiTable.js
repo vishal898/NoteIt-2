@@ -10,9 +10,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+<<<<<<< HEAD
 import Preview from '../Preview/Preview';
 
 import Notecard from '../Ankicard/Ankicard';
+=======
+import Notecard from '../Notecard/Notecard';
+
+import AnkiCard from '../AnkiCard/AnkiCard';
+>>>>>>> 2d246a9a3d065fa0ca163dfb9d33e6b0b2274360
 import "./AnkiTable.css"
 
 
@@ -45,21 +51,7 @@ export default function CustomizedTables(props) {
   // const [isLoading, setLoading] = useState(true);
   // if(notes!== undefined )setLoading(false);
 
-  const handleDeleteChange = (noteId)=>{
-    console.log(noteId);
-    ( async()=>{
-        const delData = await axios.post(`http://localhost:5000/deleteNote/${noteId}`,{
-          withCredentials:true,
-        });
-        console.log(delData);
-        const notes = await axios.get('http://localhost:5000/getAllNotes',{
-            withCredentials:true,
-        });
-        const nd = await notes.data;
-        console.log(nd);
-        props.onChange(nd);   
-    })();
-  };
+ 
 
   const handleModal = (note)=>{
     //console.log(note);
@@ -78,12 +70,12 @@ export default function CustomizedTables(props) {
       <>
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead className="headt">
+        <TableHead className="headtq">
           <TableRow>
             <StyledTableCell style={{width: 15}}>Number</StyledTableCell>
             <StyledTableCell align="center">Title</StyledTableCell>
             <StyledTableCell align="center">Difficulty</StyledTableCell>
-            <StyledTableCell align="center"> Delete </StyledTableCell>
+           
           </TableRow>
         </TableHead>
         <TableBody>
@@ -99,18 +91,12 @@ export default function CustomizedTables(props) {
                       }}
                       color="primary"
                     > 
-                    {<Notecard  note = {note} /> }
-                    {/* {note.title} */}
+                    {<AnkiCard  note = {note} /> }
+                   
                     </Button>   
               </StyledTableCell>
               <StyledTableCell align="center">{note.difficulty}</StyledTableCell>
-              <StyledTableCell align="center"> <Button
-                      onClick={ ()=>{
-                        handleDeleteChange(note._id);
-                      }}
-                      color="secondary"
-                    >DELETE</Button>   
-                    </StyledTableCell>
+              
             </StyledTableRow>
           ))}
         </TableBody>

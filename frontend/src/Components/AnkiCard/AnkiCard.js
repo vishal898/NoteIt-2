@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
-import styles from './AnkiCard.module.css'; 
+import  './AnkiCard.css'; 
 import SimpleMDE from "react-simplemde-editor";
 
 import "easymde/dist/easymde.min.css";
@@ -24,38 +24,37 @@ const style = {
   pb: 3,
 };
 
-let data={number:1,title:'# How operating system works',diff:'easy',body:"jjkkjjkkj\n# head1\njkjjjk hhjhhjhj hhhhjh\n## head2klkk jjjkjk\njjkjkjkjkjkjkjkjk\njkjkjkjkjkjkjkjk\njjkjkjkjk hjhjhjhjhj hhjhjhjhj\n### head3\njkkjjkjkjkjk"};
+// let data={number:1,title:'# How operating system works',diff:'easy',body:"jjkkjjkkj\n# head1\njkjjjk hhjhhjhj hhhhjh\n## head2klkk jjjkjk\njjkjkjkjkjkjkjkjk\njkjkjkjkjkjkjkjk\njjkjkjkjk hjhjhjhjhj hhjhjhjhj\n### head3\njkkjjkjkjkjk"};
 
 
 
 
-function ChildModal({closeBoth}) {
+function ChildModal(props) {
+  const data=props.note
+  const closeBoth=props.closeBoth;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+ 
 
 
   
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpen} className={styles.button2} >Complete Note</Button>
+      <Button onClick={handleOpen} className="button2" >Complete Note</Button>
       <Modal
         
         open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
+       
+      
       >
         <Box sx={{ ...style, width:"70%" }}>
 
 
-          <h2  className={styles.childheading1}>Your Note</h2>
-          <h2 className={styles.childtitle}>{data.title}</h2>
+          <h2  className="childheading1">Your Note</h2>
+          <h2 className="childtitle">{data.title}</h2>
           
           
      
@@ -90,11 +89,11 @@ function ChildModal({closeBoth}) {
 
 
     <div >
-        <button className={styles.buttonql} onClick={closeBoth}>Very Easy</button>
-        <button className={styles.buttonq} onClick={closeBoth}>Easy</button>
-        <button className={styles.buttonq} onClick={closeBoth}>Medium</button>
-        <button className={styles.buttonq} onClick={closeBoth}>Hard</button>
-        <button className={styles.buttonqr} onClick={closeBoth}>Very Hard</button>
+        <button className="buttonql" onClick={closeBoth}>Very Easy</button>
+        <button className="buttonq" onClick={closeBoth}>Easy</button>
+        <button className="buttonq" onClick={closeBoth}>Medium</button>
+        <button className="buttonq" onClick={closeBoth}>Hard</button>
+        <button className="buttonqr" onClick={closeBoth}>Very Hard</button>
     </div>
 
           
@@ -110,9 +109,9 @@ function ChildModal({closeBoth}) {
   );
 }
 
-const AnkiCard = () => {
+const AnkiCard = (props) => {
 
-
+  const data=props.note
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -176,12 +175,12 @@ const AnkiCard = () => {
               ans=ans+str[i];
               backCnt=0;
           }
-          else if(str[i]=='\\')
+          else if(str[i]==='\\')
           {
             backCnt++;
           }
           else{
-            if(backCnt%2==1)
+            if(backCnt%2===1)
             { 
               for(var j=0;j<backCnt-1;j++)
               ans=ans+'\\';
@@ -214,12 +213,12 @@ const AnkiCard = () => {
 
   return (
     <>
-    <section className="hero-section">
+    
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>{data.title}</Button>
       <Modal
         open={open}
-        onClose={handleCloseP}
+        
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
@@ -227,19 +226,19 @@ const AnkiCard = () => {
 
         <Box sx={{ ...style, width: 400 }}>
           
-        <h2  className={styles.remind}>Try to remind your note ....</h2>
-        <h2  className={styles.headingmain}>Title of your note</h2>
-        <h2  className={styles.heading}>{data.title}</h2>
-        <h2  className={styles.heading}>{random(data.body)}</h2>
+        <h2  className="remind">Try to remind your note ....</h2>
+        <h2  className="headingmain" >Title of your note</h2>
+        <h2  className="heading">{data.title}</h2>
+        <h2  className="heading" >{random(data.body)}</h2>
 
 
 
-          <ChildModal className={styles.childmain1} closeBoth = {handleCloseP}/>
+          <ChildModal className="childmain1" closeBoth = {handleCloseP} note={data}/>
         </Box>
       </Modal>
     </div>
-    </section>
+   
   </>
 );
-}
+  }
 export default AnkiCard;

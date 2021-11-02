@@ -179,7 +179,7 @@ export default function Demo() {
     return (
         <div  style={{width:"1000px"}} >
            <br /><br /><br /><br/>
-            <p align="center"  className="hnote">Revision</p>
+            <p align="center"  className="hnotea">Revision</p>
             <br />
             <Stack
                 direction="row"
@@ -187,7 +187,7 @@ export default function Demo() {
                 spacing={2}
             >
                 <Box sx={{ width: "20%" }} >
-                <FormControl fullWidth sx={{ m: 1 }} className="head">
+                <FormControl fullWidth sx={{ m: 1 }} className="headc">
                     <InputLabel id="demo-simple-select-label"> Difficulty </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -195,7 +195,7 @@ export default function Demo() {
                         value={ diff }
                         label="Difficulty"
                         onChange={handleDifficultyChange}
-                        className="head"
+                        className="headc"
                     
                     >
                     <MenuItem value="easy">Easy</MenuItem>
@@ -208,7 +208,7 @@ export default function Demo() {
                     <Box >
                     <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
-                    <Select className="head"
+                    <Select className="headc"
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
@@ -237,7 +237,7 @@ export default function Demo() {
                             id="combo-box-demo"
                             options={availTitles}
                             sx={{ width: 500,color:'#fff' }}
-                            renderInput={(params) =>  <TextField className="head"{...params}   sx={{ m: 1, width: "100%",color:"#ffffff" }} id="outlined-search" label="Search field"   />
+                            renderInput={(params) =>  <TextField className="headc"{...params}   sx={{ m: 1, width: "100%",color:"#ffffff" }} id="outlined-search" label="Search field"   />
                         }
                         />
                         </Box>
