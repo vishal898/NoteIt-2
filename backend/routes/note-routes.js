@@ -20,6 +20,11 @@ router.get('/getAllNotes',async(req,res)=>{
     });
 });
 
+
+
+
+
+
 router.get('/getNote/:url',(req,res)=>{
     const {url} = req.params;
     console.log(url);
@@ -28,6 +33,11 @@ router.get('/getNote/:url',(req,res)=>{
         res.json(data);
     });
 });
+
+
+
+
+
 
 
 // // get by nodeid
@@ -164,7 +174,8 @@ router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
         notes.previousEaseFactor=easeFactor;
 
         notes.save();
-
+        var date = new Date();
+        
        res.send("sucess");
       
      }
