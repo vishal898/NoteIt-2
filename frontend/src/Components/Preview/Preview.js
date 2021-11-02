@@ -158,5 +158,3 @@ const [open, setOpen] = React.useState(false);
 }
 
 export default Preview;
-
- 

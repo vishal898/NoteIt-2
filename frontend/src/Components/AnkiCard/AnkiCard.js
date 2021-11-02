@@ -89,11 +89,11 @@ function ChildModal(props) {
 
 
     <div >
-        <button className="buttonql" onClick={closeBoth}>Very Easy</button>
-        <button className="buttonq" onClick={closeBoth}>Easy</button>
-        <button className="buttonq" onClick={closeBoth}>Medium</button>
-        <button className="buttonq" onClick={closeBoth}>Hard</button>
-        <button className="buttonqr" onClick={closeBoth}>Very Hard</button>
+        {/* <button className="buttonql" onClick={()=>{closeBoth ;  handleAnkiChange(1);} >Very Easy</button>
+        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(2);} >Easy</button>
+        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(3);} >Medium</button>
+        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(4);} >Hard</button>
+        <button className="buttonqr" onClick={()=>{closeBoth ;  handleAnkiChange(5);} >Very Hard</button> */}
     </div>
 
           

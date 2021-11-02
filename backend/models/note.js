@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { default: Preview } = require('../../frontend/src/Components/Preview/Preview');
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
@@ -54,10 +53,9 @@ const noteSchema = new Schema({
     previousInterval:{
         type:Number,
         default:0,
-    },
-    lastRevisedDate:{
-        type:Date,
     }
+    //
+
 });
 
 
