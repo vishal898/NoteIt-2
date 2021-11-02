@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Preview from '../Preview/Preview';
 
-import Notecard from '../Notecard/Notecard';
+import Notecard from '../Ankicard/Ankicard';
 import "./AnkiTable.css"
 
 

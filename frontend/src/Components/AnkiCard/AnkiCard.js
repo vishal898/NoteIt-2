@@ -62,7 +62,7 @@ function ChildModal({closeBoth}) {
           <div>
           <SimpleMDE
              
-            value={data.title}
+            value={data.body}
             
            options={{
             
