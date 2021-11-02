@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Navbar from '../../Components/Navbar/Navbar';
-import styles from './Anki.css'; 
+import styles from './Anki.module.css'; 
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
@@ -69,7 +69,7 @@ function ChildModal() {
           showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
 
           }}
-        />; 
+        />
         </div>
 
 

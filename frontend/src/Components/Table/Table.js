@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+
+import Notecard from '../Notecard/Notecard';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,17 +35,45 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
 export default function CustomizedTables(props) {
   
-  const notes = props.notes;
+  const notes = props.notes ;
+  // const [notes, setnotes] = useState(props.notes);
+  // const [isLoading, setLoading] = useState(true);
+  // if(notes!== undefined )setLoading(false);
 
+  const handleDeleteChange = (noteId)=>{
+    console.log(noteId);
+    ( async()=>{
+        const delData = await axios.post(`http://localhost:5000/deleteNote/${noteId}`,{
+          withCredentials:true,
+        });
+        console.log(delData);
+        const notes = await axios.get('http://localhost:5000/getAllNotes',{
+            withCredentials:true,
+        });
+        const nd = await notes.data;
+        console.log(nd);
+        props.onChange(nd);   
+    })();
+  };
+
+  const handleModal = (note)=>{
+    //console.log(note);
+
+  };
+  
   // console.log(notes[0].difficulty);
+
+  // if (isLoading) return "Loading...";
+  // else {
   return (
     <>
     {
       notes
-      ?<TableContainer component={Paper}>
+      ?
+      <>
+      <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -54,17 +88,36 @@ export default function CustomizedTables(props) {
             // console.log(note);
             <StyledTableRow key={note._id}>
               <StyledTableCell component="th" scope="note"> {ind+1} </StyledTableCell>
-              <StyledTableCell align="right" >{note.title}</StyledTableCell>
+              <StyledTableCell align="right"  ><Button
+                      onClick={ ()=>{
+                        handleModal(note);
+                        console.log(note);
+                        
+                      }}
+                      color="primary"
+                    > 
+                    {<Notecard  note = {note} /> }
+                    {/* {note.title} */}
+                    </Button>   
+              </StyledTableCell>
               <StyledTableCell align="right">{note.difficulty}</StyledTableCell>
-              <StyledTableCell align="right">  </StyledTableCell>
+              <StyledTableCell align="right"> <Button
+                      onClick={ ()=>{
+                        handleDeleteChange(note._id);
+                      }}
+                      color="secondary"
+                    >DELETE</Button>   
+                    </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+      </>
+
       :
-      <div>HELLO</div>
+      <div>isLoading</div>
     }
     </>
-  );
-}
+  );}
+// }

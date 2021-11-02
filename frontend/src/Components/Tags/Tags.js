@@ -6,10 +6,10 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import "./Tags.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const tagList=["Cn","os"];
+const tagList=["Cn","Os"];
 
 export default function Tags() {
 
@@ -37,7 +37,7 @@ export default function Tags() {
   else {
   return (
     <div>
-      <Button onClick={handleOpen}>Tags</Button>
+      <Button onClick={handleOpen} className="buttonq">Tags</Button>
       <Modal
         open={open}
         

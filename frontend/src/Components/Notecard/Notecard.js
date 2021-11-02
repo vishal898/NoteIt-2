@@ -13,7 +13,11 @@ import './Notecard.css';
 
 
 
-export default function Notecard() {
+export default function Notecard(props) {
+  const note = props.note;
+  console.log(note);
+  // if(note !== undefined)setLoading(false); 
+  
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -21,25 +25,17 @@ export default function Notecard() {
   const handleClose = () => {
     setOpen(false);
   };
+  let username="I am the initial value. Erase me, or try the button above.\nsweety\nbnbnmbn\n> sjjhnjnxjksxnasjkxjksbxxjkb\n> jlnnjknk\n# jkjkljkljkljkljkl\n### jkljkljkljkljk\n\n\n\nnlknklnknk\nkljlkjk\n";
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser]=useState()
-  useEffect(async () => {
-    const profile = await axios.get("http://localhost:5000/profile", 
-      {withCredentials:true});
-    setUser(profile.data);
-    setLoading(false);
+ useEffect(async () => {
+ setLoading(false);
   }, []);
-  let username="I am the initial value. Erase me, or try the button above.\nsweety\nbnbnmbn\n> sjjhnjnxjksxnasjkxjksbxxjkb\n> jlnnjknk\n# jkjkljkljkljkljkl\n### jkljkljkljkljk\n\n\n```\nnlknklnknk\nkljlkjk\n```";
-  
-
-  if (isLoading) return "Loading...";
+ if (isLoading) return "Loading...";
   else {
-
-  
-
   return (
+    <React.Fragment>
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>{note.title}</Button>
       <Modal
         open={open}
        
@@ -56,7 +52,7 @@ export default function Notecard() {
      <textarea id="titlefield" placeholder="Title Here"></textarea>
      </div>
      
-     <Button  style={{justifyContent:'right'}} onClick={handleClose}>Close</Button>
+     <button  style={{justifyContent:'right'}} className="buttonq" onClick={handleClose}>Close</button>
      
      </div>
      <br />
@@ -65,7 +61,7 @@ export default function Notecard() {
      //   onChange={this.handleChange}
      //   value={this.state.textValue}
 
-     value={username}
+     value={`${note.body}\n ${note.title}\n ${note.difficulty}`}
          options={{
           
          autofocus: true,
@@ -78,14 +74,15 @@ export default function Notecard() {
          
          showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
 
-}}
-/>
-<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-       
-     <Button   >Save</Button>
+      }}
+      />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Tags className="item buttonq"/>
+     <Difficulty className="item"/>
+        <Button  className="item buttonq"  >Save</Button>
      </div>
-     <Tags/>
-     <Difficulty/>
+     
+    
 
 
 
@@ -97,7 +94,7 @@ export default function Notecard() {
     
    </Modal>
  </div>
+ </React.Fragment>
   );
 }
 }
-
