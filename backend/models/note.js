@@ -34,21 +34,25 @@ const noteSchema = new Schema({
 
 
 
-    //vishal
+    body:{
+        type:String,
+        required: true,
+
+    },
     ankiOn:{
         type:Boolean,
     },
     repetitions:{
         type:Number,
-        //0
+        default:0,
     },
     previousEaseFactor:{
         type:Number,
-        //2.5
+        default:2.5,
     },
     previousInterval:{
         type:Number,
-        //0
+        default:0,
     }
     //
 

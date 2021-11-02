@@ -22,12 +22,15 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
+
+
+import Autocomplete from '@mui/material/Autocomplete';
+
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
 //   textAlign: 'center',
 //   color: theme.palette.text.secondary,
 // }));
-
 
 
 export default function Demo() {
@@ -37,7 +40,8 @@ export default function Demo() {
     const [diff, setDiff] = useState("All");
     const [filter, setFilter] = useState({
         difficulty: "",
-        tags:[]
+        tags:[],
+        search:"",
     });
 
     const ITEM_HEIGHT = 48;
@@ -50,55 +54,76 @@ export default function Demo() {
         },
     },
     };
-    const [availTags, setAvailTags] = useState(['OS','CN']);
+    const [availTags, setAvailTags] = useState([]);
     const theme = useTheme();
     const [tags, setTags] = React.useState([]);
 
     const [find, setFind] = useState();
 
-    const buildFilter = () => {
-        let query = {};
-        for (let keys in filter) {
-            if ( filter[keys] !== undefined && filter[keys].length > 0) {
-                query[keys] = filter[keys];
-            }
-        }
-        console.log(query); 
-        return query;
-    }
+    const [availTitles, setAvailTitles] = useState();
+
+    // const buildFilter = () => {
+    //     let query = {};
+    //     for (let keys in filter) {
+    //         if ( filter[keys] !== undefined && filter[keys].length > 0) {
+    //             query[keys] = filter[keys];
+    //         }
+    //     }
+    //     console.log(query); 
+    //     return query;
+    // }
 
     const filterData = (data, query) => {
         console.log(query);
-        
-        const filteredData = data.filter(item => (query.difficulty === undefined ||item.difficulty === query.difficulty ) && (query.tags === undefined || query.tags.length === 0 || item.tags.some(tag => query.tags.includes(tag))));
-
+        console.log(data);
+        if(data !== undefined){
+        const filteredData = data.filter(
+            item => 
+            (query.difficulty === undefined || query.difficulty === "" ||item.difficulty === query.difficulty ) && 
+            (query.tags === undefined || query.tags.length === 0 || item.tags.some(tag => query.tags.includes(tag))) &&
+            (query.search === null || query.search === "" || item.title.toLowerCase().includes(query.search.toLowerCase()))
+            );
+        console.log(filteredData);
         return filteredData;
+        }
     };
 
-    const buttonClicked = () => {
-        console.log(tableData);
-    }
 
-    useEffect(async()=>{
+    useEffect(()=>{
 
         if(!skipDBCall){
-            console.log("DB CALL")
-            const notes = await axios.get('http://localhost:5000/getAllNotes');
-            const nd = await notes.data;
-            setSkipDBCall(true);
-            setData(nd);
-            setTableData(nd);
-            const ts = await axios.get('http://localhost:5000/getTags',{
-                withCredentials:true,
-            });  
-            const ut = await ts.data;
-            setAvailTags(ut);
+            console.log("DB CALL");
+
+            ( async()=>{
+                const notes = await axios.get('http://localhost:5000/getAllNotes',{
+                    withCredentials:true,
+                });
+                const nd = await notes.data;
+                setSkipDBCall(true);
+                setData(nd);
+                setTableData(nd);
+                console.log(nd[0].body);
+                const tt = [];
+                nd.forEach((n)=>{
+                    tt.push(n.title);
+                });
+                setAvailTitles(tt);
+                console.log(tt);
+            })();
+            
+            ( async()=>{
+                const ts = await axios.get('http://localhost:5000/getTags',{
+                    withCredentials:true,
+                });  
+                const ut = await ts.data;
+                setAvailTags(ut);
+            })();
+        
         }
         setTableData(filterData(data,filter));
     },[filter])
 
 
-    
 
     const handleDifficultyChange = async(event) => {
         const val = await event.target.value;
@@ -136,12 +161,18 @@ export default function Demo() {
         });
     };
 
-    const handleSearchChange = async(event) =>{
-        const search  = await event.target.value ;
-        console.log(search);
+    const handleSearchChange = (nv) =>{
+        const search  = nv ;
+        console.log(search); 
         setFind(search);
-
+        setFilter({
+            ...filter,
+            search : search,
+        });
+        // console.log('selected clicked');
     }
+
+    
 
     return (
         <div  style={{width:"1000px"}} >
@@ -164,6 +195,7 @@ export default function Demo() {
                     <MenuItem value="easy">Easy</MenuItem>
                     <MenuItem value="medium">Medium</MenuItem>
                     <MenuItem value="hard">Hard</MenuItem>
+                    <MenuItem value="">All</MenuItem>
                     </Select>
                 </FormControl>
                 </Box>
@@ -190,20 +222,38 @@ export default function Demo() {
                     </FormControl>
                     </Box>
                     <Box sx={{ width: "60%" }}>
-                        <TextField sx={{ m: 1, width: "100%" }} id="outlined-search" label="Search field" onChange={handleSearchChange} type="search" />
-                    </Box>
+                        <Autocomplete
+                            onChange={(event, newValue) => {
+                                handleSearchChange(newValue);
+                            }}
+                            disablePortal
+                            freeSolo
+                            id="combo-box-demo"
+                            options={availTitles}
+                            sx={{ width: 300 }}
+                            renderInput={(params) =>  <TextField {...params}   sx={{ m: 1, width: "100%" }} id="outlined-search" label="Search field"   />
+                        }
+                        />
+                        </Box>
             </Stack>
             <br/>
             <br/>
             <br/>
-            {/* <button onClick={buttonClicked}>Click</button> */}
             <br/>
-            <br/>
-            <br/>
-            <Table notes = {tableData}/>
+            <Table onChange = {(value)=>{
+                setTableData(value);
+                setData(value);
+                const tt = [];
+                value.forEach((n)=>{
+                    tt.push(n.title);
+                });
+                setAvailTitles(tt);
+            }} notes = {tableData}/>
             
             
-            <br /><br /><br /><br /><br /><br />
+            <br /><br /><br />
+            {/* {console.log(data.keys(data))} */}
+            <br /><br /><br />
 
         </div>
     )
@@ -252,4 +302,3 @@ export default function Demo() {
 //     }
 //     return true;
 // });
-
