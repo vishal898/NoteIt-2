@@ -13,6 +13,7 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import SimpleMDE, { SimpleMdeReact } from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import "./Preview.css"
+import { useEffect, useState } from "react";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -34,7 +35,7 @@ const images = [
 
 function Preview(props) {
 const note=props.note;
-console.log(note)  
+console.log(note)  ;  
 const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
       setOpen(true);
@@ -48,6 +49,7 @@ const [open, setOpen] = React.useState(false);
     const maxSteps = images.length;
   
     const handleNext = () => {
+      console.log('next clicked');
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
   
@@ -57,6 +59,28 @@ const [open, setOpen] = React.useState(false);
     // const handleRead=()=>{
     //     SimpleMdeReact.setDisabled(true);
     // }
+
+    const [simpleMdeInstance, setMdeInstance] = useState();
+
+    // const getMdeInstanceCallback = (simpleMde) => {
+    //   setMdeInstance(simpleMde);
+    //   // console.log(simpleMde);
+    // };
+
+    // useEffect(() => {
+    //   console.log(activeStep);
+    //   // simpleMdeInstance && simpleMdeInstance.togglePreview();
+    //   // simpleMdeInstance &&
+    //   //   console.info("Hey I'm editor instance!", simpleMdeInstance);
+    // }, [activeStep]);
+
+    const getInstance = (instance) => {
+      // You can now store and manipulate the simplemde instance.
+      // setMdeInstance(instance);
+      // console.log(instance.options.disabled);
+      // if(instance !== undefined)
+      instance.togglePreview();
+    };
   
     return (
         <div>
@@ -87,7 +111,7 @@ const [open, setOpen] = React.useState(false);
         <SimpleMDE 
             //   onChange={this.handleChange}
             //   value={this.state.textValue}
-       
+            getMdeInstance= { getInstance } 
             value={images[activeStep].description}
                 options={{
                  

@@ -11,16 +11,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const tagList=["Cn","Os"];
 
-export default function Tags() {
+export default function Tags({tagsList}) {
 
- const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [tags,setTags]=React.useState(tagList)
- // console.log(tags);
-  console.log("after")
+  const [tags,setTags] = useState(tagsList);
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser]=useState()
+  const [user, setUser]=useState();
+  
   useEffect(async () => {
     const profile = await axios.get("http://localhost:5000/profile", 
       {withCredentials:true});
@@ -31,7 +30,9 @@ export default function Tags() {
   }, []);
 
   console.log(tags);
-  
+  const handleTagDelete = ()=>{
+    console.log('deleted chip');
+  }
 
   if (isLoading) return "Loading...";
   else {
@@ -49,14 +50,15 @@ export default function Tags() {
     <Stack spacing={3} sx={{ width: 500 }}>
 
       <Autocomplete
+        // value = {tags}
         multiple
         id="tags-filled"
-        options={tagList.map((option) => option)}
-       
+        options={tags.map((option) => option)}
+        onClick = {()=>{console.log('autocomplete clicked');}}
         freeSolo
         renderTags={(value, getTagProps) =>
           value.map((option, index) => (
-            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+            <Chip onClick = {handleTagDelete} variant="outlined" label={option} {...getTagProps({ index })} />
           ))
         }
         renderInput={(params) => (
