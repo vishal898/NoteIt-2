@@ -78,7 +78,9 @@ export default function Notecard(props) {
       />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Tags className="item buttonq"/>
+      <br />
      <Difficulty className="item"/>
+     <br />
         <Button  className="item buttonq"  >Save</Button>
      </div>
      
