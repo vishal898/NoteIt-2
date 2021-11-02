@@ -10,14 +10,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Preview from '../Preview/Preview';
 
 import Notecard from '../Notecard/Notecard';
+import "./Table.css"
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+  
     color: theme.palette.common.white,
+    fontSize: 16
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -75,20 +78,20 @@ export default function CustomizedTables(props) {
       <>
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
+        <TableHead className="headt">
           <TableRow>
-            <StyledTableCell >Number</StyledTableCell>
-            <StyledTableCell align="right">Title</StyledTableCell>
-            <StyledTableCell align="right">Difficulty</StyledTableCell>
-            <StyledTableCell align="right"> Delete </StyledTableCell>
+            <StyledTableCell style={{width: 15}}>Number</StyledTableCell>
+            <StyledTableCell align="center">Title</StyledTableCell>
+            <StyledTableCell align="center">Difficulty</StyledTableCell>
+            <StyledTableCell align="center"> Delete </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {notes.map((note,ind) => (
             // console.log(note);
             <StyledTableRow key={note._id}>
-              <StyledTableCell component="th" scope="note"> {ind+1} </StyledTableCell>
-              <StyledTableCell align="right"  ><Button
+              <StyledTableCell component="th" scope="note" style={{width: 15}}> {ind+1} </StyledTableCell>
+              <StyledTableCell align="center"  ><Button
                       onClick={ ()=>{
                         handleModal(note);
                         console.log(note);
@@ -100,8 +103,8 @@ export default function CustomizedTables(props) {
                     {/* {note.title} */}
                     </Button>   
               </StyledTableCell>
-              <StyledTableCell align="right">{note.difficulty}</StyledTableCell>
-              <StyledTableCell align="right"> <Button
+              <StyledTableCell align="center">{note.difficulty}</StyledTableCell>
+              <StyledTableCell align="center"> <Button
                       onClick={ ()=>{
                         handleDeleteChange(note._id);
                       }}
@@ -113,11 +116,17 @@ export default function CustomizedTables(props) {
         </TableBody>
       </Table>
     </TableContainer>
+    <br /><br />
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Preview note={notes}/>
+    </div>
       </>
 
       :
       <div>isLoading</div>
+     
     }
+     
     </>
   );}
 // }

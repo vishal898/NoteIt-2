@@ -13,28 +13,16 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import SimpleMDE, { SimpleMdeReact } from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import "./Preview.css"
+import { useEffect, useState } from "react";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
-const images = [
-    {
-      label: "Random Name #1",
-      description: "1 - Probably the most random thing you have ever seen!"
-    },
-    {
-      label: "Random Name #2",
-      description: "2- Hello World!"
-    },
-    {
-      label: "Random Name #3",
-      description: "3 - Hello World!"
-    }
-  ];
+
 
 function Preview(props) {
 const note=props.note;
-console.log(note)  
+console.log(note)  ;  
 const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
       setOpen(true);
@@ -45,9 +33,14 @@ const [open, setOpen] = React.useState(false);
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = images.length;
+    const[loading,isLoading]=React.useState(true)
+    
+
+    const maxSteps = note.length;
+  
   
     const handleNext = () => {
+      console.log('next clicked');
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
   
@@ -57,10 +50,32 @@ const [open, setOpen] = React.useState(false);
     // const handleRead=()=>{
     //     SimpleMdeReact.setDisabled(true);
     // }
+
+    const [simpleMdeInstance, setMdeInstance] = useState();
+
+    // const getMdeInstanceCallback = (simpleMde) => {
+    //   setMdeInstance(simpleMde);
+    //   // console.log(simpleMde);
+    // };
+
+    // useEffect(() => {
+    //   console.log(activeStep);
+    //   // simpleMdeInstance && simpleMdeInstance.togglePreview();
+    //   // simpleMdeInstance &&
+    //   //   console.info("Hey I'm editor instance!", simpleMdeInstance);
+    // }, [activeStep]);
+
+    const getInstance = (instance) => {
+      // You can now store and manipulate the simplemde instance.
+      // setMdeInstance(instance);
+      // console.log(instance.options.disabled);
+      // if(instance !== undefined)
+      instance.togglePreview();
+    };
   
     return (
         <div>
-        <Button onClick={handleOpen}>Preview</Button>
+        <button className="buttonq1" onClick={handleOpen}>Preview</button>
         <Modal
           open={open}
          
@@ -81,14 +96,15 @@ const [open, setOpen] = React.useState(false);
             bgcolor: 'background.default',
           }}
         >
-          <Typography>{images[activeStep].label}</Typography>
+          <Typography>{note[activeStep].title}</Typography>
           <Button  style={{justifyContent:'right'}} onClick={handleClose}>Close</Button>
         </Paper>
         <SimpleMDE 
             //   onChange={this.handleChange}
             //   value={this.state.textValue}
-       
-            value={images[activeStep].description}
+            getMdeInstance= { getInstance } 
+            value={note[activeStep].body}
+            
                 options={{
                  
                 autofocus: true,
@@ -98,7 +114,8 @@ const [open, setOpen] = React.useState(false);
                     delay: 1000,
                     uniqueId: 'note'
                 },
-                disabled:true,
+               
+                
                 
                 showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
        
