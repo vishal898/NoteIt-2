@@ -10,15 +10,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-<<<<<<< HEAD
-import Preview from '../Preview/Preview';
-
-import Notecard from '../Ankicard/Ankicard';
-=======
 import Notecard from '../Notecard/Notecard';
 
 import AnkiCard from '../AnkiCard/AnkiCard';
->>>>>>> 2d246a9a3d065fa0ca163dfb9d33e6b0b2274360
 import "./AnkiTable.css"
 
 
