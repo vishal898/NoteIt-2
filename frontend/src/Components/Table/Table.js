@@ -99,7 +99,7 @@ export default function CustomizedTables(props) {
                       }}
                       color="primary"
                     > 
-                    {<Notecard  note = {note} /> }
+                    {<Notecard note = {note} /> }
                     {/* {note.title} */}
                     </Button>   
               </StyledTableCell>

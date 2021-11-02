@@ -39,13 +39,14 @@ export default function Notecard(props) {
   }
 
   const handleSaveChange = (NID)=>{
-    console.log(NID);
-    // console.log(note);
-    // ( async()=>{
-    //   const updatedNote = await axios.post('http://localhost:5000/updateNote/',note,{
-    //       withCredentials:true,
-    //   });  
-    // })();
+    // console.log(NID);
+    console.log(note);
+    ( async()=>{
+      const updatedNote = await axios.post('http://localhost:5000/updateNote/',note,{
+          withCredentials:true,
+      });  
+      
+    })();
     setOpen(false);
   }
    
@@ -59,7 +60,7 @@ export default function Notecard(props) {
         <Box className="container"> 
           <div className="Save">
             <div className="title" id="titleid" >
-              <TextField id="titlefield" value = {note.title}  placeholder="Title Here"></TextField>
+              <TextField id="titlefield" freesolo defaultValue ={note.title}   onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
             </div>
           </div>
           <br />

@@ -11,7 +11,9 @@ router.get('/',(req,res)=>{
 
 // get read 
 router.get('/getAllNotes',async(req,res)=>{
-    Note.find({ },(err,data)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    Note.find({userId:uid},(err,data)=>{
         if(err)throw error;
         res.json(data);
         // console.log(data);
