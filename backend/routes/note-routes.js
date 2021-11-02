@@ -53,10 +53,13 @@ router.post('/updateNote',(req,res)=>{
 
 // post delete 
 router.post('/deleteNote/:noteId',(req,res)=>{
-    Note.findOneAndDelete({_id:url},(err,data)=>{
-        if(err)throw error;
-        res.json(data);
+    const NID = req.params.noteId;
+    console.log(NID);
+    Note.findOneAndDelete({_id:NID},(err,data)=>{
+        if(err)res.send(err);
+        res.send(`DELETED ${NID}`);
     });
+    console.log('hit delete api');
 });
 
 router.get("/getTags",(req,res)=>{  
