@@ -34,13 +34,10 @@ const Navbar = () => {
               <NavLink to="/home">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/anki">Anki</NavLink>
+              <NavLink to="/anki">Revise</NavLink>
             </li>
             <li>
-              <NavLink to="/topic">Topic</NavLink>
-            </li>
-            <li>
-              <NavLink to="/create">create</NavLink>
+              <NavLink to="/create">Create</NavLink>
             </li>
             <li> <NavLink to="/user">
                 < BsPersonFill/>

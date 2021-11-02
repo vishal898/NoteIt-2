@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Table from './Table/Table';
 
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -21,6 +22,7 @@ import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import "./Demo.css"
 
 
 
@@ -176,13 +178,16 @@ export default function Demo() {
 
     return (
         <div  style={{width:"1000px"}} >
+           <br /><br /><br /><br/>
+            <p align="center"  className="hnote">Your Notes</p>
+            <br />
             <Stack
                 direction="row"
                 divider={<Divider orientation="vertical" flexItem />}
                 spacing={2}
             >
-                <Box sx={{ width: "20%" }}>
-                <FormControl fullWidth sx={{ m: 1 }}>
+                <Box sx={{ width: "20%" }} >
+                <FormControl fullWidth sx={{ m: 1 }} className="head">
                     <InputLabel id="demo-simple-select-label"> Difficulty </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -190,6 +195,7 @@ export default function Demo() {
                         value={ diff }
                         label="Difficulty"
                         onChange={handleDifficultyChange}
+                        className="head"
                     
                     >
                     <MenuItem value="easy">Easy</MenuItem>
@@ -199,10 +205,10 @@ export default function Demo() {
                     </Select>
                 </FormControl>
                 </Box>
-                    <Box>
+                    <Box >
                     <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
-                    <Select
+                    <Select className="head"
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
@@ -221,8 +227,8 @@ export default function Demo() {
                     </Select>
                     </FormControl>
                     </Box>
-                    <Box sx={{ width: "60%" }}>
-                        <Autocomplete
+                    <Box sx={{ width: "60%" ,color:'white'}}  >
+                        <Autocomplete 
                             onChange={(event, newValue) => {
                                 handleSearchChange(newValue);
                             }}
@@ -230,8 +236,8 @@ export default function Demo() {
                             freeSolo
                             id="combo-box-demo"
                             options={availTitles}
-                            sx={{ width: 300 }}
-                            renderInput={(params) =>  <TextField {...params}   sx={{ m: 1, width: "100%" }} id="outlined-search" label="Search field"   />
+                            sx={{ width: 500,color:'#fff' }}
+                            renderInput={(params) =>  <TextField className="head"{...params}   sx={{ m: 1, width: "100%",color:"#ffffff" }} id="outlined-search" label="Search field"   />
                         }
                         />
                         </Box>
@@ -249,6 +255,10 @@ export default function Demo() {
                 });
                 setAvailTitles(tt);
             }} notes = {tableData}/>
+
+            
+
+            
             
             
             <br /><br /><br />

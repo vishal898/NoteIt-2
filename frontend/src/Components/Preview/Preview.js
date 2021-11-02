@@ -18,20 +18,7 @@ import { useEffect, useState } from "react";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
-const images = [
-    {
-      label: "Random Name #1",
-      description: "1 - Probably the most random thing you have ever seen!"
-    },
-    {
-      label: "Random Name #2",
-      description: "2- Hello World!"
-    },
-    {
-      label: "Random Name #3",
-      description: "3 - Hello World!"
-    }
-  ];
+
 
 function Preview(props) {
 const note=props.note;
@@ -46,7 +33,11 @@ const [open, setOpen] = React.useState(false);
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = images.length;
+    const[loading,isLoading]=React.useState(true)
+    
+
+    const maxSteps = note.length;
+  
   
     const handleNext = () => {
       console.log('next clicked');
@@ -84,7 +75,7 @@ const [open, setOpen] = React.useState(false);
   
     return (
         <div>
-        <Button onClick={handleOpen}>Preview</Button>
+        <button className="buttonq1" onClick={handleOpen}>Preview</button>
         <Modal
           open={open}
          
@@ -105,14 +96,15 @@ const [open, setOpen] = React.useState(false);
             bgcolor: 'background.default',
           }}
         >
-          <Typography>{images[activeStep].label}</Typography>
+          <Typography>{note[activeStep].title}</Typography>
           <Button  style={{justifyContent:'right'}} onClick={handleClose}>Close</Button>
         </Paper>
         <SimpleMDE 
             //   onChange={this.handleChange}
             //   value={this.state.textValue}
             getMdeInstance= { getInstance } 
-            value={images[activeStep].description}
+            value={note[activeStep].body}
+            
                 options={{
                  
                 autofocus: true,
@@ -122,7 +114,8 @@ const [open, setOpen] = React.useState(false);
                     delay: 1000,
                     uniqueId: 'note'
                 },
-                disabled:true,
+               
+                
                 
                 showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
        

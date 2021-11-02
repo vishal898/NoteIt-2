@@ -9,7 +9,6 @@ import {
 import Create from './pages/Create/Create';
 import Home from './pages/Home/Home';
 import Anki from './pages/Anki/Anki';
-import FilterTopic from './pages/FilterTopic/FilterTopic';
 import User from './pages/User/user';
 import Glogin from './pages/Glogin/Glogin'
 
@@ -31,9 +30,6 @@ const App=()=> {
       <Anki />
     </Route>
 
-    <Route exact path="/topic">
-      <FilterTopic />
-    </Route>
 
     <Route exact path="/create">
       <Create/>
