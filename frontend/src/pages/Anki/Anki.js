@@ -6,7 +6,9 @@ import Button from '@mui/material/Button';
 import Navbar from '../../Components/Navbar/Navbar';
 import styles from './Anki.module.css'; 
 import SimpleMDE from "react-simplemde-editor";
+
 import "easymde/dist/easymde.min.css";
+
 
 const style = {
   position: 'absolute',
@@ -22,12 +24,12 @@ const style = {
   pb: 3,
 };
 
-let data={number:1,title:'How operating system works',diff:'easy'};
+let data={number:1,title:'# How operating system works',diff:'easy'};
 
 
 
 
-function ChildModal() {
+function ChildModal({closeBoth}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -35,6 +37,9 @@ function ChildModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  
 
   return (
     <React.Fragment>
@@ -56,29 +61,40 @@ function ChildModal() {
      
           <div>
           <SimpleMDE
-          //   onChange={this.handleChange}
+             
             value={data.title}
-
-
+            
            options={{
             
-            autofocus: true,
+
+            autofocus: false,
             spellChecker: false,
          
          // initialValue:{value},
-          showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
-
+         
+          hideIcons: ['bold','italic','quote','heading','unordered-list','ordered-list','link','image','horizontal-rule','preview','side-by-side','guide','fullscreen']
+ 
           }}
-        />
+          
+
+        />; 
+        
+      
+          
+
+
+
+
+
         </div>
 
 
     <div >
-        <button className={styles.buttonql}>Very Easy</button>
-        <button className={styles.buttonq}>Easy</button>
-        <button className={styles.buttonq}>Medium</button>
-        <button className={styles.buttonq}>Hard</button>
-        <button className={styles.buttonqr}>Very Hard</button>
+        <button className={styles.buttonql} onClick={closeBoth}>Very Easy</button>
+        <button className={styles.buttonq} onClick={closeBoth}>Easy</button>
+        <button className={styles.buttonq} onClick={closeBoth}>Medium</button>
+        <button className={styles.buttonq} onClick={closeBoth}>Hard</button>
+        <button className={styles.buttonqr} onClick={closeBoth}>Very Hard</button>
     </div>
 
           
@@ -87,7 +103,7 @@ function ChildModal() {
 
 
 
-          <Button onClick={handleClose}>Close Child Modal</Button>
+          
         </Box>
       </Modal>
     </React.Fragment>
@@ -101,7 +117,7 @@ const Anki = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleCloseP = () => {
     setOpen(false);
   };
 
@@ -116,7 +132,7 @@ const Anki = () => {
       <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseP}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
@@ -130,7 +146,7 @@ const Anki = () => {
 
 
 
-          <ChildModal className={styles.childmain1}/>
+          <ChildModal className={styles.childmain1} closeBoth = {handleCloseP}/>
         </Box>
       </Modal>
     </div>
