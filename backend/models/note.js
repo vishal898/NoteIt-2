@@ -37,7 +37,6 @@ const noteSchema = new Schema({
     body:{
         type:String,
         required: true,
-
     },
     ankiOn:{
         type:Boolean,
@@ -56,9 +55,7 @@ const noteSchema = new Schema({
     },
     lastRevisedDate:{
         type:Date,
-        
     }
-    //
 
 });
 

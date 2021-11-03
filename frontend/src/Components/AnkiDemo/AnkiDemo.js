@@ -97,7 +97,7 @@ export default function Demo() {
             console.log("DB CALL");
 
             ( async()=>{
-                const notes = await axios.get('http://localhost:5000/getAllNotes',{
+                const notes = await axios.get('http://localhost:5000/getAnkiNotes',{
                     withCredentials:true,
                 });
                 const nd = await notes.data;

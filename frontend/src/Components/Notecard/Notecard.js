@@ -64,9 +64,8 @@ export default function Notecard(props) {
             </div>
           </div>
           <br />
-            <div >
+            <div className="CodeM">
           <SimpleMDE 
-           className="CodeMi"
             value={" \n #### I am the initial value. "}
               options={{
                 autofocus: true,
