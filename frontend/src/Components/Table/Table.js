@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Preview from '../Preview/Preview';
+// import Preview from '../Preview/Preview';
 
 import Notecard from '../Notecard/Notecard';
 import "./Table.css"
@@ -118,7 +118,7 @@ export default function CustomizedTables(props) {
     </TableContainer>
     <br /><br />
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <Preview note={notes}/>
+    {/* <Preview note={notes}/> */}
     </div>
       </>
 

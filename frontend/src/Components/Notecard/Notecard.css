@@ -83,3 +83,13 @@
   height: 50px;
   margin: 0 5px;
 }
+
+.CodeM {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.CodeMi {
+  max-height: 350px;
+  overflow-y: auto;
+}

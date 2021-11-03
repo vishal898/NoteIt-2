@@ -64,8 +64,9 @@ export default function Notecard(props) {
             </div>
           </div>
           <br />
-            
-          <SimpleMDE
+            <div >
+          <SimpleMDE 
+           className="CodeMi"
             value={" \n #### I am the initial value. "}
               options={{
                 autofocus: true,
@@ -78,6 +79,7 @@ export default function Notecard(props) {
                 showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
               }}
           />
+          </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Tags tagsList = {note.tags} className="item buttonq"/>
             <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
