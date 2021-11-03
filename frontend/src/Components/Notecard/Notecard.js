@@ -64,9 +64,9 @@ export default function Notecard(props) {
             </div>
           </div>
           <br />
-            
-          <SimpleMDE
-            value={"**sdfsf**\n*sdfsdf*\n\n### sdff\n\n* sdf\n* sfs\n\n1. sdf\n2. fsd\n\n# sdfsdf"}
+            <div className="CodeM">
+          <SimpleMDE 
+            value={" \n #### I am the initial value. "}
               options={{
                 autofocus: true,
                 spellChecker: false,
@@ -78,6 +78,7 @@ export default function Notecard(props) {
                 showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
               }}
           />
+          </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Tags tagsList = {note.tags} className="item buttonq"/>
             <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>

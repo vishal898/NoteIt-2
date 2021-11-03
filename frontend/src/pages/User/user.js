@@ -31,6 +31,7 @@ const User = () => {
 
           <p><button className="loginbutton" ><a style={{color:'white'}} href="http://localhost:5000/logout">Logout</a></button></p>
         </div>
+      
        
       </div>
     </>

@@ -196,8 +196,8 @@ export default function Demo() {
                         label="Difficulty"
                         onChange={handleDifficultyChange}
                         className="headc"
-                    
                     >
+                           
                     <MenuItem value="easy">Easy</MenuItem>
                     <MenuItem value="medium">Medium</MenuItem>
                     <MenuItem value="hard">Hard</MenuItem>
@@ -205,7 +205,7 @@ export default function Demo() {
                     </Select>
                 </FormControl>
                 </Box>
-                    <Box >
+                    <Box>
                     <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-checkbox-label">Tags</InputLabel>
                     <Select className="headc"
