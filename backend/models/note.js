@@ -53,6 +53,10 @@ const noteSchema = new Schema({
     previousInterval:{
         type:Number,
         default:0,
+    },
+    lastRevisedDate:{
+        type:Date,
+        
     }
     //
 

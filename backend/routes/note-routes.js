@@ -9,6 +9,20 @@ router.get('/',(req,res)=>{
     res.send('hello');
 });
 
+
+// get read id 
+router.get('/getUid',async(req,res)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    // Note.find({userId:uid},(err,data)=>{
+    //     if(err)throw error;
+    //     res.json(data);
+    //     // console.log(data);
+    // });
+});
+
+
+
 // get read 
 router.get('/getAllNotes',async(req,res)=>{
     const uid=req.user._id;
@@ -19,6 +33,21 @@ router.get('/getAllNotes',async(req,res)=>{
         // console.log(data);
     });
 });
+
+
+router.get('/getAnkiNotes',async(req,res)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    Note.find({userId:uid},(err,data)=>{
+        if(err)throw error;
+        res.json(data);
+        // console.log(data);
+    });
+});
+
+
+
+
 
 
 
