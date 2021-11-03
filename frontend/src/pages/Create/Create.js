@@ -12,7 +12,24 @@ import "easymde/dist/easymde.min.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField } from '@mui/material';
+
+
 //import { sizeWidth } from '@mui/system';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -27,6 +44,7 @@ const Create = () => {
     tags:[],
     url:"none",
     createdTime:new Date(),
+    ankiOn:false,
   });
   useEffect(async () => {
     
@@ -62,6 +80,38 @@ const Create = () => {
     note.body=value;
   };
 
+  let selectanki = 0;
+  const ankiOnOff=()=>{
+    
+    
+
+    selectanki++;
+    selectanki = selectanki % 2;
+    if (selectanki == 0) {
+        document.getElementById("b5").style.backgroundColor = "Green";
+        document.getElementById("b5").innerHTML = "On";
+    } else {
+        document.getElementById("b5").style.backgroundColor = "Red";
+        document.getElementById("b5").innerHTML = "Off";
+    }
+
+    
+    console.log(selectanki);
+    if(selectanki===0)
+      note.ankiOn=true;
+    else
+      note.ankiOn=false;
+
+  }
+
+
+  
+  
+      
+
+
+
+
  if (isLoading) return "Loading...";
   else {
   return (
@@ -94,7 +144,15 @@ const Create = () => {
             {/* <Tags tagsList = {note.tags} className="item buttonq"/> */}
             <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
             <Button  className="item buttonq" onClick={()=>{handleSaveChange()}} >Save</Button>
-          </div>     
+              
+
+  
+            <button id="b5" onClick={ankiOnOff}>On</button>
+ 
+
+ 
+
+          </div>      
         </Box>  
   </div>
 </>

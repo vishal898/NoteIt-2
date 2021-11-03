@@ -119,7 +119,7 @@ router.get('/getNote/:url',(req,res)=>{
 router.post('/createNote',(req,res)=>{
    
     
-    const {difficulty,title,body,createdTime,url,tags} = req.body;
+    const {difficulty,title,body,createdTime,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -129,7 +129,7 @@ router.post('/createNote',(req,res)=>{
         createdTime:createdTime,
         tags:tags,
         body:body,
-
+        ankiOn:ankiOn,
 	});
     newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);

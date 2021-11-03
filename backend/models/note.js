@@ -40,6 +40,7 @@ const noteSchema = new Schema({
     },
     ankiOn:{
         type:Boolean,
+        default:false,
     },
     repetitions:{
         type:Number,
