@@ -75,26 +75,26 @@ router.post('/createNote/:userId',(req,res)=>{
 
 
 // post update 
-// router.post('/updateNote/:idA',(req,res)=>{
+router.post('/updateNote/:idA',(req,res)=>{
 
-//     const {url,difficulty,title,createdTime,tags,body} = req.body;
-//       let id = req.params.idA;
-//       console.log(id);
-//       Note.findById(id, (err, notes)=> {
-//       if (err){
-//         console.log(err);
-//       }
-//       else{
-//         console.log("Result : ", notes);
+    const {url,difficulty,title,createdTime,tags,body} = req.body;
+      let id = req.params.idA;
+      console.log(id);
+      Note.findById(id, (err, notes)=> {
+      if (err){
+        console.log(err);
+      }
+      else{
+        console.log("Result : ", notes);
 
-//         notes.body=body;
-//         notes.tags=tags;
-//         // all other atribute 
-//        notes.save();
-//        res.send("sucess");
-//      }
-//     });
-// });
+        notes.body=body;
+        notes.tags=tags;
+        // all other atribute 
+       notes.save();
+       res.send("sucess");
+     }
+    });
+});
 
 
 // post delete 
