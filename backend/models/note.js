@@ -37,7 +37,6 @@ const noteSchema = new Schema({
     body:{
         type:String,
         required: true,
-
     },
     ankiOn:{
         type:Boolean,
@@ -53,8 +52,10 @@ const noteSchema = new Schema({
     previousInterval:{
         type:Number,
         default:0,
+    },
+    lastRevisedDate:{
+        type:Date,
     }
-    //
 
 });
 

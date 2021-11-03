@@ -20,31 +20,48 @@ import { TextField } from '@mui/material';
 const Create = () => {
  
   const [isLoading, setLoading] = useState(true);
-  const [note, setNote]=useState()
+  const [note, setFilter] = useState({
+    title:"",
+    body:"",
+    difficulty: "",
+    tags:[],
+    url:"none",
+    createdTime:new Date(),
+  });
   useEffect(async () => {
-    const notes = await axios.get("http://localhost:5000/getAllNotes", 
-      {withCredentials:true});
-    setNote(notes.data);
+    
     setLoading(false);
   }, []);
-  console.log(note)
 
   const handleRemoveBtnClick = () => {
     console.log('clicked');
   }
 
-  const handleSaveChange = (NID)=>{
+  const handleSaveChange = ()=>{
     // console.log(NID);
+    console.log("***************************************");
     console.log(note);
+
+    let x=note;
+
+    //delete x._id;
+
     ( async()=>{
       const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
           withCredentials:true,
       });  
       
     })();
-  
+    
+    //console.log(x);
   }
-   
+
+  
+  const onChange = (value) => {
+    
+    note.body=value;
+  };
+
  if (isLoading) return "Loading...";
   else {
   return (
@@ -54,14 +71,15 @@ const Create = () => {
         <Box className="container"> 
           <div className="Save">
             <div className="title" id="titleid" >
-              <TextField id="titlefield" freesolo defaultValue ={note.title}   onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
+              <TextField id="titlefield"   onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
           </div>
           </div>
           <br />
             
           <SimpleMDE
-            value={note.body }
+               onChange={onChange}
               options={{
+                
                 autofocus: true,
                 spellChecker: false,
                 autosave: {
@@ -75,7 +93,7 @@ const Create = () => {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {/* <Tags tagsList = {note.tags} className="item buttonq"/> */}
             <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
-            <Button  className="item buttonq" onClick={()=> handleSaveChange(note._id)} >Save</Button>
+            <Button  className="item buttonq" onClick={()=>{handleSaveChange()}} >Save</Button>
           </div>     
         </Box>  
   </div>

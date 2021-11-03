@@ -10,6 +10,20 @@ router.get('/',(req,res)=>{
     res.send('hello');
 });
 
+
+// get read id 
+router.get('/getUid',async(req,res)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    // Note.find({userId:uid},(err,data)=>{
+    //     if(err)throw error;
+    //     res.json(data);
+    //     // console.log(data);
+    // });
+});
+
+
+
 // get read 
 router.get('/getAllNotes',async(req,res)=>{
     const uid=req.user._id;
@@ -22,14 +36,59 @@ router.get('/getAllNotes',async(req,res)=>{
 });
 
 
+router.get('/getAnkiNotes',async(req,res)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    Note.find({userId:uid},(err,data)=>{
+        if(err)throw error;
+
+        var filtered = data.filter(function(note) {
+
+            let date1=note.lastRevisedDate;
+            let date2 = new Date();
+            
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            console.log(diffDays + " days");
+             return (diffDays==note.interval); 
+            
+        });
+        res.json(filtered);
+    });
+});
+
+
+
+
+router.get('/getNoteCount',async(req,res)=>{
+    const uid=req.user._id;
+    console.log(uid);
+    Note.find({userId:uid},(err,data)=>{
+        if(err)throw error;
+
+       
+
+        res.json(note.length);
+        // console.log(data);
+    });
+});
+
+
+
+
+
 
 
 
 
 router.get('/getNote/:url',(req,res)=>{
+    const userId = req.user._id;
     const {url} = req.params;
+    console.log('getnote started');
     console.log(url);
-    Note.find({_id:url},(err,data)=>{
+    console.log(userId);
+    console.log('getnote finished');
+    Note.find({url:url,userId:userId},(err,data)=>{
         if(err)throw error;
         res.json(data);
     });
@@ -59,7 +118,9 @@ router.get('/getNote/:url',(req,res)=>{
 
 // post create 
 router.post('/createNote',(req,res)=>{
-    const {url,difficulty,title,createdTime,tags} = req.body;
+   
+    
+    const {difficulty,title,body,createdTime,url,tags} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -68,10 +129,13 @@ router.post('/createNote',(req,res)=>{
         title:title,
         createdTime:createdTime,
         tags:tags,
-        visitCnt:visitCnt,
+        body:body,
+
 	});
+    newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);
     newNote.save();
+   console.log(req.body);
 });
 
 
@@ -107,6 +171,32 @@ router.post('/updateNote/:idA',(req,res)=>{
          
      
 });
+
+// router.post('/updateNote/:idA',(req,res)=>{
+
+//     const {url,difficulty,title,createdTime,tags} = req.body;
+//       let id = req.params.idA;
+//       console.log(id);
+//       Note.findById(id, (err, notes)=> {
+//       if (err){
+//         console.log(err);
+//       }
+//       else{
+//         console.log("Result : ", notes);
+
+//         notes.title=title;
+//         notes.tags=[];
+
+
+//         // all other atribute 
+//        notes.save();
+       
+//        console.log(notes);
+//        res.send("success");
+//      }
+//     });
+// });
+
 
 
 // post delete 
