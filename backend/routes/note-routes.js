@@ -81,9 +81,13 @@ router.get('/getNoteCount',async(req,res)=>{
 
 
 router.get('/getNote/:url',(req,res)=>{
+    const userId = req.user._id;
     const {url} = req.params;
+    console.log('getnote started');
     console.log(url);
-    Note.find({_id:url},(err,data)=>{
+    console.log(userId);
+    console.log('getnote finished');
+    Note.find({url:url,userId:userId},(err,data)=>{
         if(err)throw error;
         res.json(data);
     });
