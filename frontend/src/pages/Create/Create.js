@@ -37,7 +37,7 @@ const Create = () => {
     // console.log(NID);
     console.log(note);
     ( async()=>{
-      const updatedNote = await axios.post('http://localhost:5000/updateNote/',note,{
+      const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
           withCredentials:true,
       });  
       
@@ -84,6 +84,3 @@ const Create = () => {
 }
 }            
 export default Create;
-
-
-

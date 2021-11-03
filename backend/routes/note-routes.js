@@ -57,9 +57,9 @@ router.get('/getNote/:url',(req,res)=>{
 
 
 // post create 
-router.post('/createNote/:userId',(req,res)=>{
+router.post('/createNote',(req,res)=>{
     const {url,difficulty,title,createdTime,tags} = req.body;
-    const {userId} = req.params;
+    const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
         url:url,
@@ -119,13 +119,14 @@ router.get("/getTags",(req,res)=>{
 });
 
 
-router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
+router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
 
       let repetitionn; 
       let previousEaseFactorn;
       let previousIntervaln; 
       let id = req.params.idA;
-      console.log(id);
+    //   console.log(`ankiupdate - ${id}`);
+      
       Note.findById(id, (err, notes)=> {
       if (err){
         console.log(err);
@@ -143,7 +144,7 @@ router.put('/ankiUpdate/:idA/:qualityA', (req, res) => {
        let quality=req.params.qualityA; // take from frontend 
        let easeFactor;
        let interval;
-       console.log(quality);
+    //    console.log(`ankiupdate - ${quality}`);
 
        if(quality>=3)
        {

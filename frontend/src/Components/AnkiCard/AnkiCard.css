@@ -186,3 +186,7 @@
     -0.125rem -0.125rem 1rem rgba(28, 3, 253, 0.5),
     0.125rem 0.125rem 1rem rgba(107, 68, 248, 0.5);
 }
+
+.is-disabled{
+  pointer-events: none; 
+}
