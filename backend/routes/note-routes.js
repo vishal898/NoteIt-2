@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
+const { findOneAndUpdate } = require("../models/note");
 const Note = require('../models/note');
 const User = require('../models/user');
 
@@ -77,23 +78,34 @@ router.post('/createNote',(req,res)=>{
 // post update 
 router.post('/updateNote/:idA',(req,res)=>{
 
-    const {url,difficulty,title,createdTime,tags,body} = req.body;
+    const {difficulty,title,tags,body} = req.body;
       let id = req.params.idA;
       console.log(id);
-      Note.findById(id, (err, notes)=> {
-      if (err){
-        console.log(err);
-      }
-      else{
-        console.log("Result : ", notes);
-
-        notes.body=body;
-        notes.tags=tags;
-        // all other atribute 
-       notes.save();
-       res.send("sucess");
-     }
-    });
+    //   const {url,difficulty,title,createdTime,tags} = req.body;
+    // const userId = req.user._id;
+    // const newNote = new Note({
+	// 	userId:userId,
+    //     url:url,
+    //     difficulty:difficulty,
+    //     title:title,
+    //     createdTime:createdTime,
+    //     tags:tags,
+    //     visitCnt:visitCnt,
+	// });
+    // console.log(newNote);
+    // newNote.save();
+     
+     Note.findOneAndUpdate(
+        { id: id },
+        { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
+        (err, data) => {
+            if(err) throw err;
+            else{
+            console.log(data);   
+         console.log('success');}
+         });
+         
+     
 });
 
 
