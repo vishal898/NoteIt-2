@@ -26,6 +26,7 @@ export default function Tags({tagsList}) {
     setUser(profile.data);
    // setTags(profile.data.tags);
     console.log(profile.data.tags)
+    setTags(profile.data.tags)
     setLoading(false);
   }, []);
 
@@ -53,6 +54,7 @@ export default function Tags({tagsList}) {
         // value = {tags}
         multiple
         id="tags-filled"
+        
         options={tags.map((option) => option)}
         onClick = {()=>{console.log('autocomplete clicked');}}
         freeSolo
@@ -66,6 +68,7 @@ export default function Tags({tagsList}) {
             {...params}
             label="Tag List"
             placeholder="Add tags"
+          value={tags}
           />
         )}
       />

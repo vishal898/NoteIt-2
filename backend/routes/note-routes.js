@@ -120,7 +120,7 @@ router.get('/getNote/:url',(req,res)=>{
 router.post('/createNote',(req,res)=>{
    
     
-    const {difficulty,title,body,createdTime,url,tags} = req.body;
+    const {difficulty,title,body,createdTime,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -130,7 +130,7 @@ router.post('/createNote',(req,res)=>{
         createdTime:createdTime,
         tags:tags,
         body:body,
-
+        ankiOn:ankiOn,
 	});
     newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);
@@ -139,63 +139,65 @@ router.post('/createNote',(req,res)=>{
 });
 
 
-// post update 
-router.post('/updateNote/:idA',(req,res)=>{
-
-    const {difficulty,title,tags,body} = req.body;
-      let id = req.params.idA;
-      console.log(id);
-    //   const {url,difficulty,title,createdTime,tags} = req.body;
-    // const userId = req.user._id;
-    // const newNote = new Note({
-	// 	userId:userId,
-    //     url:url,
-    //     difficulty:difficulty,
-    //     title:title,
-    //     createdTime:createdTime,
-    //     tags:tags,
-    //     visitCnt:visitCnt,
-	// });
-    // console.log(newNote);
-    // newNote.save();
-     
-     Note.findOneAndUpdate(
-        { id: id },
-        { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
-        (err, data) => {
-            if(err) throw err;
-            else{
-            console.log(data);   
-         console.log('success');}
-         });
-         
-     
-});
-
+// // post update 
 // router.post('/updateNote/:idA',(req,res)=>{
 
-//     const {url,difficulty,title,createdTime,tags} = req.body;
+//     const {difficulty,title,tags,body} = req.body;
 //       let id = req.params.idA;
 //       console.log(id);
-//       Note.findById(id, (err, notes)=> {
-//       if (err){
-//         console.log(err);
-//       }
-//       else{
-//         console.log("Result : ", notes);
-
-//         notes.title=title;
-//         notes.tags=[];
-
-
-//         // all other atribute 
-//        notes.save();
-       
-//        console.log(notes);
-//        res.send("success");
-//      }
-//     });
+//     //   const {url,difficulty,title,createdTime,tags} = req.body;
+//     // const userId = req.user._id;
+//     // const newNote = new Note({
+// 	// 	userId:userId,
+//     //     url:url,
+//     //     difficulty:difficulty,
+//     //     title:title,
+//     //     createdTime:createdTime,
+//     //     tags:tags,
+//     //     visitCnt:visitCnt,
+// 	// });
+//     // console.log(newNote);
+//     // newNote.save();
+     
+//      Note.findOneAndUpdate(
+//         { id: id },
+//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
+//         (err, data) => {
+//             if(err) throw err;
+//             else{
+//             console.log(data);   
+//          console.log('success');}
+//          });
+         
+     
 // });
+
+router.post('/updateNote/:idA',(req,res)=>{
+
+    const {difficulty,title,body} = req.body;
+      let id = req.params.idA;
+      console.log(id);
+      Note.findById(id, (err, notes)=> {
+      if (err){
+        console.log(err);
+      }
+      else{
+        console.log("Result : ", notes);
+
+        notes.title=title;
+        // notes.tags=[];
+        notes.body=body;
+        notes.difficulty=difficulty;
+
+
+        // all other atribute 
+       notes.save();
+       
+       console.log(notes);
+       res.send("success");
+     }
+    });
+});
 
 
 

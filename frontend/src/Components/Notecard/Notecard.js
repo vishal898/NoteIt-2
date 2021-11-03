@@ -19,36 +19,36 @@ import { sizeWidth } from '@mui/system';
 export default function Notecard(props) {
 
   const note = props.note;
-  // console.log(note.tags); 
   const [open, setOpen] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
-  // const [note, setNote] = useState(props.note);
-
-
+  
+ 
   const handleOpen = () => {
     setOpen(true);
   };
-
-  useEffect(async () => {
+  useEffect(async () => {  
+    
     setLoading(false);
-  
   }, []);
-
-  const handleRemoveBtnClick = () => {
-    console.log('clicked');
-  }
-
   const handleSaveChange = (NID)=>{
-    // console.log(NID);
     console.log(note);
     ( async()=>{
-      const updatedNote = await axios.post('http://localhost:5000/updateNote/',note,{
+      const updatedNote = await axios.post(`http://localhost:5000/updateNote/${NID}`,note,{
           withCredentials:true,
-      });  
-      
+      });    
     })();
     setOpen(false);
   }
+
+  const handleValuechange=(value)=>{
+    note.body=value
+  }
+      const getInstance = (instance) => {
+      // You can now store and manipulate the simplemde instance.
+      // setMdeInstance(instance);
+      // console.log(instance.options.disabled);
+      // if(instance !== undefined)
+    };
    
  if (isLoading) return "Loading...";
   else {
@@ -68,6 +68,8 @@ export default function Notecard(props) {
           <SimpleMDE 
            
             value={note.body}
+            onChange={handleValuechange}
+            getMdeInstance= { getInstance } 
               options={{
                 autofocus: true,
                 spellChecker: false,
