@@ -118,7 +118,7 @@ export default function CustomizedTables(props) {
     </TableContainer>
     <br /><br />
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <Preview note={notes}/>
+    {/* <Preview note={notes}/> */}
     </div>
       </>
 

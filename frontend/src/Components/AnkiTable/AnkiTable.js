@@ -85,7 +85,7 @@ export default function CustomizedTables(props) {
                       }}
                       color="primary"
                     > 
-                    {<AnkiCard  note = {note} /> }
+                    {<AnkiCard  onchange = {()=>{}} note = {note} /> }
                    
                     </Button>   
               </StyledTableCell>

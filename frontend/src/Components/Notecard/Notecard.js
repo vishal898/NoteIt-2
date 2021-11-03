@@ -66,7 +66,7 @@ export default function Notecard(props) {
           <br />
             
           <SimpleMDE
-            value={" \n #### I am the initial value. "}
+            value={"**sdfsf**\n*sdfsdf*\n\n### sdff\n\n* sdf\n* sfs\n\n1. sdf\n2. fsd\n\n# sdfsdf"}
               options={{
                 autofocus: true,
                 spellChecker: false,

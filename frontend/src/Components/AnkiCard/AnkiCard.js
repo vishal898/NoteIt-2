@@ -1,14 +1,16 @@
 
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-
+import { useEffect, useState } from 'react';
 import  './AnkiCard.css'; 
 import SimpleMDE from "react-simplemde-editor";
+import SimpleMdeReact from "react-simplemde-editor";
 
 import "easymde/dist/easymde.min.css";
 
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -24,22 +26,65 @@ const style = {
   pb: 3,
 };
 
-// let data={number:1,title:'# How operating system works',diff:'easy',body:"jjkkjjkkj\n# head1\njkjjjk hhjhhjhj hhhhjh\n## head2klkk jjjkjk\njjkjkjkjkjkjkjkjk\njkjkjkjkjkjkjkjk\njjkjkjkjk hjhjhjhjhj hhjhjhjhj\n### head3\njkkjjkjkjkjk"};
-
-
-
 
 function ChildModal(props) {
   const data=props.note
   const closeBoth=props.closeBoth;
-  const [open, setOpen] = React.useState(false);
+  let str = "";
+  str = data.body;
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
+  const [disabled, setDisabled] = useState("none");
  
+  const handleAnkiChange = (nid,quality)=>{
+    console.log(nid);
+    console.log(quality);
+    ( async()=>{
+      const updateAnki = await axios.post(`http://localhost:5000/ankiUpdate/${nid}/${quality}`,{
+          withCredentials:true,
+      });  
+      console.log(updateAnki);
+    })();
+    
+    closeBoth() ;
+  }
 
+  const getInstance = (instance) => {
+    if(instance!== null)instance.togglePreview();
+    console.log(instance.value);
+  };
 
-  
+  function parseMarkdown(markdownText) {
+    const htmlText = markdownText
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+      .replace(/\*(.*)\*/gim, '<i>$1</i>')
+      .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
+      .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+      .replace(/\n$/gim, '<br />')
+    
+    console.log(htmlText.trim());
+  }
+
+  const [value, setValue] = useState("**sdfsf**\n*sdfsdf*\n\n### sdff\n\n* sdf\n* sfs\n\n1. sdf\n2. fsd\n\n# sdfsdf");
+  console.log(value);
+  console.log(typeof(value));
+  console.log(data.body);
+  console.log(typeof(data.body));
+  const ss = `${data.body}`;
+  console.log(ss);
+  console.log(typeof(ss));
+
+  const onChange = (value) => {
+    
+    setValue(value);
+  };
+  parseMarkdown(data.body);
 
   return (
     <React.Fragment>
@@ -58,11 +103,12 @@ function ChildModal(props) {
           
           
      
-          <div>
-          <SimpleMDE
-             
-            value={data.body}
-            
+          <div className={disabled} >
+          <SimpleMdeReact
+            value={`${data.body}`} 
+            onChange={onChange}
+            // value={value}
+            getMdeInstance= { getInstance } 
            options={{
             
 
@@ -76,24 +122,16 @@ function ChildModal(props) {
           }}
           
 
-        />; 
-        
-      
-          
-
-
-
-
-
+        />
         </div>
 
 
     <div >
-        {/* <button className="buttonql" onClick={()=>{closeBoth ;  handleAnkiChange(1);} >Very Easy</button>
-        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(2);} >Easy</button>
-        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(3);} >Medium</button>
-        <button className="buttonq" onClick={()=>{closeBoth ;  handleAnkiChange(4);} >Hard</button>
-        <button className="buttonqr" onClick={()=>{closeBoth ;  handleAnkiChange(5);} >Very Hard</button> */}
+        <button className="buttonql" onClick={()=>{  handleAnkiChange(data._id,1);}} >Very Easy</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,2);}} >Easy</button>
+        <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,3);}} >Medium</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,4);}} >Hard</button>
+        <button className="buttonqr" onClick={()=>{ handleAnkiChange(data._id,5);}} >Very Hard</button>
     </div>
 
           
