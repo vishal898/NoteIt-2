@@ -22,10 +22,7 @@ const userSchema = new Schema({
         },
     ],
     tags:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:'Tag',
-        },
+       String
     ]
 });
 

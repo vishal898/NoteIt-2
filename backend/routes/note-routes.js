@@ -50,7 +50,8 @@ router.get('/getAnkiNotes',async(req,res)=>{
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             console.log(diffDays + " days");
-             return (diffDays==note.interval && note.ankiOn==true); 
+           // return 1;
+             return (diffDays>=note.previousInterval && note.ankiOn==true); 
             
         });
         res.json(filtered);
@@ -135,7 +136,16 @@ router.post('/createNote',(req,res)=>{
     newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);
     newNote.save();
+    console.log(newNote._id)
+    console.log(typeof(userId))
+    console.log(typeof(newNote._id))
    console.log(req.body);
+    User.findById(userId,(err,user)=>{
+        user.notes.push(newNote._id)
+        //user.tags.push(newNote.tags)
+        user.save()
+    })
+    
 });
 
 
@@ -174,7 +184,7 @@ router.post('/createNote',(req,res)=>{
 
 router.post('/updateNote/:idA',(req,res)=>{
 
-    const {difficulty,title,body} = req.body;
+    const {difficulty,title,tags,ankiOn,body} = req.body;
       let id = req.params.idA;
       console.log(id);
       Note.findById(id, (err, notes)=> {
@@ -184,15 +194,22 @@ router.post('/updateNote/:idA',(req,res)=>{
       else{
         console.log("Result : ", notes);
 
+        if(notes.ankiOn==false && ankiOn==true)
+        {
+            notes.repetitions=0;
+            notes.previousEaseFactor=2.5;
+            notes.previousInterval=0;
+            notes.lastRevisedDate=new Date();
+        }
         notes.title=title;
-        // notes.tags=[];
-        notes.body=body;
+        notes.tags=tags;
         notes.difficulty=difficulty;
+        notes.ankiOn=ankiOn;
+        notes.body=body;
 
-
-        // all other atribute 
+        
        notes.save();
-       
+        
        console.log(notes);
        res.send("success");
      }

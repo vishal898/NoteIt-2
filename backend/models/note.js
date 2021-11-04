@@ -22,12 +22,7 @@ const noteSchema = new Schema({
 		type: Date,
 		required: true,
 	},
-    tags:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:'Tag',
-        },
-    ],
+    tags:[String],
     visitCnt:{
         type:Number,
     },
