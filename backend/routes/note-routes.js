@@ -50,7 +50,7 @@ router.get('/getAnkiNotes',async(req,res)=>{
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             console.log(diffDays + " days");
-             return (diffDays==note.interval); 
+             return (diffDays==note.interval && note.ankiOn==true); 
             
         });
         res.json(filtered);
@@ -61,9 +61,9 @@ router.get('/getAnkiNotes',async(req,res)=>{
 
 
 router.get('/getNoteCount',async(req,res)=>{
-    const uid=req.user._id;
+    const uid=req.user.;
     console.log(uid);
-    Note.find({userId:uid},(err,data)=>{
+    Note.find({userId:uid},(err,_iddata)=>{
         if(err)throw error;
 
        
