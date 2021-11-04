@@ -50,8 +50,8 @@ router.get('/getAnkiNotes',async(req,res)=>{
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             console.log(diffDays + " days");
-             return (diffDays==note.interval && note.ankiOn==true); 
-            
+            //return 1;
+             return (diffDays>=note.previousInterval && note.ankiOn==true); 
         });
         res.json(filtered);
     });
@@ -60,18 +60,18 @@ router.get('/getAnkiNotes',async(req,res)=>{
 
 
 
-router.get('/getNoteCount',async(req,res)=>{
-    const uid=req.user._id;
-    console.log(uid);
-    Note.find({userId:uid},(err,data)=>{
-        if(err)throw error;
+// router.get('/getNoteCount',async(req,res)=>{
+//     const uid=req.user._id;
+//     console.log(uid);
+//     Note.find({userId:uid},(err,data)=>{
+//         if(err)throw error;
 
        
 
-        res.json(note.length);
-        // console.log(data);
-    });
-});
+//         res.json(note.length);
+//         // console.log(data);
+//     });
+// });
 
 
 
@@ -135,67 +135,78 @@ router.post('/createNote',(req,res)=>{
     newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);
     newNote.save();
-   console.log(req.body);
+    console.log(newNote._id);
 });
 
 
 // post update 
-router.post('/updateNote/:idA',(req,res)=>{
-
-    const {difficulty,title,tags,body} = req.body;
-      let id = req.params.idA;
-      console.log(id);
-    //   const {url,difficulty,title,createdTime,tags} = req.body;
-    // const userId = req.user._id;
-    // const newNote = new Note({
-	// 	userId:userId,
-    //     url:url,
-    //     difficulty:difficulty,
-    //     title:title,
-    //     createdTime:createdTime,
-    //     tags:tags,
-    //     visitCnt:visitCnt,
-	// });
-    // console.log(newNote);
-    // newNote.save();
-     
-     Note.findOneAndUpdate(
-        { id: id },
-        { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
-        (err, data) => {
-            if(err) throw err;
-            else{
-            console.log(data);   
-         console.log('success');}
-         });
-         
-     
-});
-
 // router.post('/updateNote/:idA',(req,res)=>{
 
-//     const {url,difficulty,title,createdTime,tags} = req.body;
+//     const {difficulty,title,tags,body} = req.body;
 //       let id = req.params.idA;
 //       console.log(id);
-//       Note.findById(id, (err, notes)=> {
-//       if (err){
-//         console.log(err);
-//       }
-//       else{
-//         console.log("Result : ", notes);
-
-//         notes.title=title;
-//         notes.tags=[];
-
-
-//         // all other atribute 
-//        notes.save();
-       
-//        console.log(notes);
-//        res.send("success");
-//      }
-//     });
+//     //   const {url,difficulty,title,createdTime,tags} = req.body;
+//     // const userId = req.user._id;
+//     // const newNote = new Note({
+// 	// 	userId:userId,
+//     //     url:url,
+//     //     difficulty:difficulty,
+//     //     title:title,
+//     //     createdTime:createdTime,
+//     //     tags:tags,
+//     //     visitCnt:visitCnt,
+// 	// });
+//     // console.log(newNote);
+//     // newNote.save();
+     
+//      Note.findOneAndUpdate(
+//         { id: id },
+//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
+//         (err, data) => {
+//             if(err) throw err;
+//             else{
+//             console.log(data);   
+//          console.log('success');}
+//          });
+         
+     
 // });
+
+
+
+router.post('/updateNote/:idA',(req,res)=>{
+
+    const {difficulty,title,tags,ankiOn,body} = req.body;
+      let id = req.params.idA;
+      console.log(id);
+      Note.findById(id, (err, notes)=> {
+      if (err){
+        console.log(err);
+      }
+      else{
+        console.log("Result : ", notes);
+
+        if(notes.ankiOn==false && ankiOn==true)
+        {
+            notes.repetitions=0;
+            notes.previousEaseFactor=2.5;
+            notes.previousInterval=0;
+            notes.lastRevisedDate=new Date();
+        }
+        notes.title=title;
+        notes.tags=tags;
+        notes.difficulty=difficulty;
+        notes.ankiOn=ankiOn;
+        notes.body=body;
+
+        
+       notes.save();
+        
+       console.log(notes);
+       res.send("success");
+     }
+    });
+});
 
 
 
@@ -275,7 +286,8 @@ router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
         notes.repetitions=repetitionn;
         notes.previousInterval=interval;
         notes.previousEaseFactor=easeFactor;
-
+        notes.lastRevisedDate=new Date();
+        console.log(repetitionn);
         notes.save();
         var date = new Date();
         
