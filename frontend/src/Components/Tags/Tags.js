@@ -26,6 +26,7 @@ export default function Tags({tagsList}) {
     setUser(profile.data);
    // setTags(profile.data.tags);
     console.log(profile.data.tags)
+    setTags(profile.data.tags)
     setLoading(false);
   }, []);
 
@@ -38,7 +39,7 @@ export default function Tags({tagsList}) {
   else {
   return (
     <div>
-      <Button onClick={handleOpen} className="buttonq">Tags</Button>
+      <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px"}} onClick={handleOpen}>Tags</Button>
       <Modal
         open={open}
         
@@ -53,6 +54,7 @@ export default function Tags({tagsList}) {
         // value = {tags}
         multiple
         id="tags-filled"
+        
         options={tags.map((option) => option)}
         onClick = {()=>{console.log('autocomplete clicked');}}
         freeSolo
@@ -66,11 +68,12 @@ export default function Tags({tagsList}) {
             {...params}
             label="Tag List"
             placeholder="Add tags"
+          value={tags}
           />
         )}
       />
     </Stack>
-    <Button onClick={handleClose}>Close</Button>
+    <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",margin:"5px",height:"30px"}} onClick={handleClose}>Close</Button>
     </Box>
     </Modal>
     </div>

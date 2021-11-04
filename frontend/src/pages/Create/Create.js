@@ -9,6 +9,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import "easymde/dist/easymde.min.css";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField } from '@mui/material';
@@ -35,6 +36,11 @@ import { TextField } from '@mui/material';
 
 
 const Create = () => {
+  const getvalueA=(e,val)=>{
+    console.log(val);
+    note.ankiOn=val;
+
+  }
  
   const [isLoading, setLoading] = useState(true);
   const [note, setFilter] = useState({
