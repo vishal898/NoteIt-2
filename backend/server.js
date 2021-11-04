@@ -10,7 +10,7 @@ const MongoStore = require("connect-mongo");
 const dbConnection = require('./config/dbconnect');
 
 const Note = require('./models/note');
-const Tag = require('./models/tag');
+
 const User = require('./models/user');
 const mongoose = require('mongoose');
 

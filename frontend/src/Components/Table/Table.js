@@ -41,6 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables(props) {
   
   const notes = props.notes ;
+  //const [difficulty,setDifficulty]=React.usestate();
   // const [notes, setnotes] = useState(props.notes);
   // const [isLoading, setLoading] = useState(true);
   // if(notes!== undefined )setLoading(false);
@@ -60,6 +61,14 @@ export default function CustomizedTables(props) {
         props.onChange(nd);   
     })();
   };
+  // const handleDifficulty=(note,value)=>{
+  //   console.log(value);
+  //   note.difficulty=value;
+  //   console.log(note.difficulty);
+  //   document.getElementById("diff").innerHTML = note.difficulty;
+    
+    
+  // }
 
   const handleModal = (note)=>{
     //console.log(note);
@@ -89,6 +98,7 @@ export default function CustomizedTables(props) {
         <TableBody>
           {notes.map((note,ind) => (
             // console.log(note);
+            
             <StyledTableRow key={note._id}>
               <StyledTableCell component="th" scope="note" style={{width: 15}}> {ind+1} </StyledTableCell>
               <StyledTableCell align="center"  ><Button
@@ -99,11 +109,11 @@ export default function CustomizedTables(props) {
                       }}
                       color="primary"
                     > 
-                    {<Notecard note = {note} /> }
-                    {/* {note.title} */}
+                    {<Notecard note = {note} onClose={(value)=>{console.log(value);note.difficulty=value; document.getElementById("diff").innerHTML = note.difficulty; }}/> }
+                    
                     </Button>   
               </StyledTableCell>
-              <StyledTableCell align="center">{note.difficulty}</StyledTableCell>
+              <StyledTableCell id="diff"align="center"  >{note.difficulty}</StyledTableCell>
               <StyledTableCell align="center"> <Button
                       onClick={ ()=>{
                         handleDeleteChange(note._id);

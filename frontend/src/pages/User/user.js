@@ -11,8 +11,10 @@ const User = () => {
     const profile = await axios.get("http://localhost:5000/profile", 
       {withCredentials:true});
     setUser(profile.data);
+    
     setLoading(false);
   }, []);
+ // console.log(user.notes.length)
 
   if (isLoading) return "Loading...";
   else {
@@ -25,7 +27,7 @@ const User = () => {
           <h1 className="username"><li>{user.username}</li></h1>
           <p className="title"><li>{user.email}</li></p>
           <h2 className="yourtag">Note Count</h2>
-          <button className="buttonhome"><li>{user.tags.length}</li></button>
+          <button className="buttonhome"><li>{user.notes.length}</li></button>
           <h2 className="yourtag">Your Tags</h2>
           <p className="tags"><li>{user.tags.toString()}</li></p>
 

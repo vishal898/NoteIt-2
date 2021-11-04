@@ -40,6 +40,8 @@ export default function Notecard(props) {
     setOpen(false);
   }
 
+  
+
   const handleValuechange=(value)=>{
     note.body=value
   }
@@ -83,7 +85,7 @@ export default function Notecard(props) {
       <Modal open={open} aria-labelledby="parent-modal-title" aria-describedby="parent-modal-description">  
         <Box className="container"> 
           
-              <TextField sx={{ width: "100%",height:"50px" }} id="titlefield" freesolo defaultValue ={note.title}    onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
+              <TextField sx={{ width: "100%",height:"50px" }} id="titlefield" freesolo defaultValue ={note.title}    onChange={(event)=>{note.title = event.target.value; }} placeholder="Title Here"></TextField>
            
           <br />
             <div className="CodeM">
@@ -108,7 +110,7 @@ export default function Notecard(props) {
 
           <div className="bottom">
             <Box sx={{ width: "100%",height:"50px" }}>
-            <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}} onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} /></Box>
+            <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}} onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty);props.onClose(note.difficulty) }} dif={note.difficulty} /></Box>
             <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
             <div className="item">
             <Tags  className="buttonqs item" tagsList = {note.tags} />

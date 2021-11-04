@@ -50,8 +50,14 @@ router.get('/getAnkiNotes',async(req,res)=>{
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             console.log(diffDays + " days");
+<<<<<<< HEAD
             //return 1;
              return (diffDays>=note.previousInterval && note.ankiOn==true); 
+=======
+           // return 1;
+             return (diffDays>=note.previousInterval && note.ankiOn==true); 
+            
+>>>>>>> 3a6d5a4b22232e1f9e86657cbca0a9320757bf82
         });
         res.json(filtered);
     });
@@ -135,7 +141,20 @@ router.post('/createNote',(req,res)=>{
     newNote.lastRevisedDate=newNote.createdTime;
     console.log(newNote);
     newNote.save();
+<<<<<<< HEAD
     console.log(newNote._id);
+=======
+    console.log(newNote._id)
+    console.log(typeof(userId))
+    console.log(typeof(newNote._id))
+   console.log(req.body);
+    User.findById(userId,(err,user)=>{
+        user.notes.push(newNote._id)
+        //user.tags.push(newNote.tags)
+        user.save()
+    })
+    
+>>>>>>> 3a6d5a4b22232e1f9e86657cbca0a9320757bf82
 });
 
 
