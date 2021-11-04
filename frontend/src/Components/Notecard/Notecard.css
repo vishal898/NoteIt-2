@@ -21,10 +21,10 @@
   align-items: center;
 }
 
-.save {
+/* .save {
   display: flex;
   /* grid-template-columns: 9fr 1fr; */
-}
+
 .save button {
   color: #ffffff;
   background-color: #180a4b;
@@ -32,37 +32,39 @@
   font-size: 10pt;
 }
 #titlefield {
-  grid-column: 1/8;
-  float: left;
   height: 25px;
-  width: 70%;
-  resize: none;
+  width: 100%;
+  resize: horizontal;
+  text-align: center;
+  color: #2d205f;
   font-size: 13pt;
-  margin-bottom: 1%;
+  font-weight: bold;
+  font-family: monospace;
+  font-style: italic;
+
+  margin: 1px;
+  padding: 1px;
 }
 
-.buttonq {
-  background: linear-gradient(to bottom right, #9284b6, #cac5f5);
-  border: 0;
+.buttonqs {
+  background: linear-gradient(to bottom right, #4b5291, #6a81e9);
+
   border-radius: 15px;
   color: #ffffff;
   cursor: pointer;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
   font-size: 16px;
   font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
+
   padding: 0 1rem;
   text-align: center;
-  text-decoration: none;
+
   transition: box-shadow 0.2s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  width: 100px;
-  margin-left: 14px;
+  width: 70px;
+
   height: 35px;
 }
 
@@ -79,9 +81,13 @@
 }
 
 .item {
-  width: 50px;
-  height: 50px;
-  margin: 0 5px;
+  height: 30px;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 120px 100px 100px 100px;
+  justify-content: end;
 }
 
 .CodeM {

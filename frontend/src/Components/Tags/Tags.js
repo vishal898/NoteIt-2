@@ -39,7 +39,7 @@ export default function Tags({tagsList}) {
   else {
   return (
     <div>
-      <Button onClick={handleOpen} className="buttonq">Tags</Button>
+      <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px"}} onClick={handleOpen}>Tags</Button>
       <Modal
         open={open}
         
@@ -73,7 +73,7 @@ export default function Tags({tagsList}) {
         )}
       />
     </Stack>
-    <Button onClick={handleClose}>Close</Button>
+    <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",margin:"5px",height:"30px"}} onClick={handleClose}>Close</Button>
     </Box>
     </Modal>
     </div>

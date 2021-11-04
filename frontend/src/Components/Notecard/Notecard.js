@@ -49,7 +49,31 @@ export default function Notecard(props) {
       // console.log(instance.options.disabled);
       // if(instance !== undefined)
     };
-   
+    let selectanki = 0;
+    const ankiOnOff=()=>{
+      
+      
+  
+      selectanki++;
+      selectanki = selectanki % 2;
+      if (selectanki === 0) {
+          document.getElementById("b5").style.backgroundColor = "Green";
+          document.getElementById("b5").innerHTML = "On";
+      } else {
+          document.getElementById("b5").style.backgroundColor = "Red";
+          document.getElementById("b5").innerHTML = "Off";
+      }
+  
+      
+      console.log(selectanki);
+      if(selectanki===0)
+        note.ankiOn=true;
+      else
+        note.ankiOn=false;
+  
+    }
+
+
  if (isLoading) return "Loading...";
   else {
   return (
@@ -58,11 +82,9 @@ export default function Notecard(props) {
       <Button onClick={handleOpen}>{note.title}</Button>
       <Modal open={open} aria-labelledby="parent-modal-title" aria-describedby="parent-modal-description">  
         <Box className="container"> 
-          <div className="Save">
-            <div className="title" id="titleid" >
-              <TextField id="titlefield" freesolo defaultValue ={note.title}   onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
-            </div>
-          </div>
+          
+              <TextField sx={{ width: "100%",height:"50px" }} id="titlefield" freesolo defaultValue ={note.title}    onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
+           
           <br />
             <div className="CodeM">
           <SimpleMDE 
@@ -82,10 +104,18 @@ export default function Notecard(props) {
               }}
           />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Tags tagsList = {note.tags} className="item buttonq"/>
-            <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
-            <Button  className="item buttonq" onClick={()=> handleSaveChange(note._id)} >Save</Button>
+          <br/>
+
+          <div className="bottom">
+            <Box sx={{ width: "100%",height:"50px" }}>
+            <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}} onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} /></Box>
+            <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
+            <div className="item">
+            <Tags  className="buttonqs item" tagsList = {note.tags} />
+            </div>
+            <div className="item">
+            <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=> handleSaveChange(note._id)} >Save</Button>
+            </div>
           </div>     
         </Box>
       </Modal>
