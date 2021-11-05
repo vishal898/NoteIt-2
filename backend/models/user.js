@@ -23,6 +23,9 @@ const userSchema = new Schema({
     ],
     tags:[
        String
+    ],
+    urls:[
+       String
     ]
 });
 
