@@ -152,7 +152,7 @@ const Create = () => {
             <Button  className="item buttonq" onClick={()=>{handleSaveChange()}} >Save</Button>
               
 
-  
+            <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
             <button id="b5" onClick={ankiOnOff}>On</button>
  
 

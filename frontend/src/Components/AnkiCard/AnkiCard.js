@@ -239,7 +239,9 @@ const AnkiCard = (props) => {
           }
       }
     }
-    
+    const temp=ans .split(",");
+    console.log(temp);
+
     return ans;
   }
 

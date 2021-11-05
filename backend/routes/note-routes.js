@@ -121,14 +121,14 @@ router.get('/getNote/:url',(req,res)=>{
 router.post('/createNote',(req,res)=>{
    
     
-    const {difficulty,title,body,createdTime,url,tags,ankiOn} = req.body;
+    const {difficulty,title,body,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
         url:url,
         difficulty:difficulty,
         title:title,
-        createdTime:createdTime,
+        createdTime:new Date(),
         tags:tags,
         body:body,
         ankiOn:ankiOn,
@@ -143,8 +143,32 @@ router.post('/createNote',(req,res)=>{
     User.findById(userId,(err,user)=>{
         user.notes.push(newNote._id)
         //user.tags.push(newNote.tags)
-        user.save()
-    })
+
+
+
+        let newTags=user.tags;
+
+            console.log(newTags);
+
+
+            
+            for(let i=0;i<newNote.tags.length;i++)
+            {
+                   newTags.push(newNote.tags[i]);
+            }
+            
+            let a2= Array.from(new Set(newTags));
+
+
+
+
+            console.log(a2);
+            user.tags=a2;
+        
+
+
+             user.save()
+    });
     
 });
 
@@ -203,18 +227,53 @@ router.post('/updateNote/:idA',(req,res)=>{
             notes.previousInterval=0;
             notes.lastRevisedDate=new Date();
         }
+              
         notes.title=title;
         notes.tags=tags;
         notes.difficulty=difficulty;
         notes.ankiOn=ankiOn;
         notes.body=body;
 
-        
-       notes.save();
-        
-       console.log(notes);
-       res.send("success");
-     }
+
+
+        User.findById(req.user._id, (err, users)=> {
+            if (err){
+              console.log(err);
+            }
+            else
+            {
+
+                    console.log("...........");
+                    console.log(users);
+
+                    let newTags=users.tags;
+
+                    console.log(newTags);
+
+
+                    
+                    for(let i=0;i<tags.length;i++)
+                    {
+                           newTags.push(tags[i]);
+                    }
+                    
+
+                    
+                    let a2= Array.from(new Set(newTags));
+
+                    console.log(a2);
+                    users.tags=a2;
+                    
+                    notes.save();
+                    users.save();
+                    console.log(notes);
+                    res.send("success");
+            
+            }
+     
+       }); 
+    }
+
     });
 });
 
