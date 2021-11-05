@@ -11,6 +11,7 @@ import SimpleMdeReact from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
 import axios from 'axios';
+import { flexbox } from '@mui/system';
 
 const style = {
   position: 'absolute',
@@ -88,7 +89,9 @@ function ChildModal(props) {
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpen} className="button2" >Complete Note</Button>
+      <div className="complete">
+      <Button onClick={handleOpen} className="buttonq" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",fontWeight:"bold"}} >Open Note</Button>
+      </div>
       <Modal
         
         open={open}
@@ -98,12 +101,13 @@ function ChildModal(props) {
         <Box sx={{ ...style, width:"70%" }}>
 
 
-          <h2  className="childheading1">Your Note</h2>
-          <h2 className="childtitle">{data.title}</h2>
+         
+          <h2 className="headingTitle">{data.title}</h2>
           
           
      
           <div className={disabled} >
+          <div className="CoM">
           <SimpleMdeReact
             value={`${data.body}`} 
             onChange={onChange}
@@ -120,18 +124,19 @@ function ChildModal(props) {
           hideIcons: ['bold','italic','quote','heading','unordered-list','ordered-list','link','image','horizontal-rule','preview','side-by-side','guide','fullscreen']
  
           }}
-          
+         
 
         />
+         </div>
         </div>
 
 
-    <div >
-        <button className="buttonql" onClick={()=>{  handleAnkiChange(data._id,1);}} >Very Easy</button>
+    <div className="bottoma">
+        <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,1);}} >Very Easy</button>
         <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,2);}} >Easy</button>
         <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,3);}} >Medium</button>
         <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,4);}} >Hard</button>
-        <button className="buttonqr" onClick={()=>{ handleAnkiChange(data._id,5);}} >Very Hard</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,5);}} >Very Hard</button>
     </div>
 
           
@@ -239,8 +244,24 @@ const AnkiCard = (props) => {
           }
       }
     }
+    // var node = document.createElement("LI");                 
+    const temp=ans.split(",");
+    console.log(temp);
+    // ans=ans.split(",").join("\n")
+    // for(var k=0;k<temp.length;k++)
+    // {
+    //   var textnode = document.createTextNode(temp[k]);
+    //   node.appendChild(textnode); 
+    //   document.getElementById("myList").appendChild(node);  
+    // }
+    return (
+    	<ul>
+      {temp.map(a => <li>{a}</li>)}
+      	</ul>
+    )
     
-    return ans;
+    
+    //return ans;
   }
 
 
@@ -262,12 +283,15 @@ const AnkiCard = (props) => {
       >
         
 
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{ ...style, width: 700,maxHeight:"800"}}>
           
-        <h2  className="remind">Try to remind your note ....</h2>
-        <h2  className="headingmain" >Title of your note</h2>
+        <h2  className="remind">Try to recall your note ....</h2>
+       
         <h2  className="heading">{data.title}</h2>
-        <h2  className="heading" >{random(data.body)}</h2>
+        <br />
+       
+        <div id="myList" className="heading2" >{random(data.body)}</div>
+        
 
 
 

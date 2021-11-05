@@ -4,8 +4,10 @@ const Home = () => {
   return (
     <>
     <Navbar/>
+    <br /><br /><br />
     <section className="hero-section">
-      
+      <br /><br /><br /><br /><br />
+
       
       <Demo></Demo>
       

@@ -49,6 +49,7 @@
   grid-row: 4/5;
   text-align: center;
   height: 40px;
+  cursor: pointer;
 
   border-width: 0;
   background: white;

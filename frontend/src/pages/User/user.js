@@ -24,12 +24,12 @@ const User = () => {
       <div className="middle" >
         <div className="card">
       
-          <h1 className="username"><li>{user.username}</li></h1>
-          <p className="title"><li>{user.email}</li></p>
+          <h1 className="username"><li>&nbsp;&nbsp; {user.username}&nbsp;&nbsp;</li></h1>
+          <p className="title" ><li>&nbsp;&nbsp;&nbsp; {user.email}&nbsp;&nbsp;&nbsp; </li></p>
           <h2 className="yourtag">Note Count</h2>
+          <div className="cent">
           <button className="buttonhome"><li>{user.notes.length}</li></button>
-          <h2 className="yourtag">Your Tags</h2>
-          <p className="tags"><li>{user.tags.toString()}</li></p>
+          </div>
 
           <p><button className="loginbutton" ><a style={{color:'white'}} href="http://localhost:5000/logout">Logout</a></button></p>
         </div>

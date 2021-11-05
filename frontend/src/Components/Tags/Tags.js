@@ -51,7 +51,7 @@ export default function Tags({tagsList}) {
     <Stack spacing={3} sx={{ width: 500 }}>
 
       <Autocomplete
-        // value = {tags}
+         value = {tags}
         multiple
         id="tags-filled"
         
