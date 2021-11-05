@@ -57,3 +57,48 @@
     -0.125rem -0.125rem 1rem rgba(107, 68, 248, 0.5),
     0.125rem 0.125rem 1rem rgba(28, 3, 253, 0.5);
 }
+
+
+
+.container {
+  display: flex;
+  overflow: scroll;
+  width: 100%;
+  max-width: 100%;
+  padding-left: 14px;
+  border: 1px grey solid;
+  border-radius: 5px;
+  color: black
+}
+
+.container input {
+  width: 100%;
+  min-width: 50%;
+  border: none;
+  border-radius: 5px;
+  padding: 14px;
+  padding-left: 14px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  margin: 7px 0;
+  margin-right: 10px;
+  padding: 0 10px;
+  padding-right: 5px;
+  border: 1px solid rgb(162, 0, 255);
+  border-radius: 5px;
+  background-color: rgb(142, 61, 218);
+  white-space: nowrap;
+  color: white;
+}
+
+.tag button {
+  display: flex;
+  padding: 6px;
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+  color: white;
+}

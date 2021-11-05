@@ -1,16 +1,29 @@
 .heading {
-  color: rgb(42, 96, 141);
-  padding-left: 15%;
+  color: rgb(255, 255, 255);
+
   font-size: 20px;
-  background-color: rgb(243, 227, 139);
+  background: linear-gradient(to bottom right, #4b5291, #6a81e9);
+  text-align: center;
+  font-family: cursive;
+  border-radius: 5px;
   width: 100%;
 }
-.remind {
-  color: rgb(255, 179, 79);
-  padding: 10px;
-  padding-bottom: 20px;
-  margin-left: 20%;
+
+.heading2 {
+  color: rgb(42, 96, 141);
+  padding-left: 5%;
   font-size: 15px;
+
+  width: 70%;
+  height: max-content;
+}
+.remind {
+  color: rgb(34, 19, 75);
+  padding: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-family: monospace;
 }
 
 .headingmain {
@@ -73,27 +86,24 @@
 /* CSS */
 .buttonq {
   background: linear-gradient(to bottom right, #4b5291, #6a81e9);
-  border: 0;
-  border-radius: 15px;
+
+  border-radius: 32px;
   color: #ffffff;
   cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  padding: 1px 1px 1px 1px;
+
+  padding: 0 1rem;
   text-align: center;
-  text-decoration: none;
+  margin-top: 10px;
+
   transition: box-shadow 0.2s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  width: 100px;
-  margin-left: 14px;
+  width: 95px;
+
   height: 35px;
 }
 
@@ -187,6 +197,35 @@
     0.125rem 0.125rem 1rem rgba(107, 68, 248, 0.5);
 }
 
-.is-disabled{
-  pointer-events: none; 
+.is-disabled {
+  pointer-events: none;
+}
+
+.headingTitle {
+  height: 25px;
+  width: 100%;
+  background: linear-gradient(to bottom right, #4b5291, #6a81e9);
+  text-align: center;
+  color: #fbfafc;
+  font-size: 13pt;
+  font-weight: bold;
+  font-family: monospace;
+  font-style: italic;
+  border-radius: 4px;
+
+  margin: 1px;
+  padding: 1px;
+}
+.CoM {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.bottoma {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 110px;
+  justify-content: end;
+}
+.complete {
+  display: flex;
+  justify-content: end;
 }

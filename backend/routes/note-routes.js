@@ -120,7 +120,9 @@ router.get('/getNote/:url',(req,res)=>{
 
 // post create 
 router.post('/createNote',(req,res)=>{
-    const {difficulty,title,body,url,ankiOn} = req.body;
+   
+    
+    const {difficulty,title,body,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -128,45 +130,42 @@ router.post('/createNote',(req,res)=>{
         difficulty:difficulty,
         title:title,
         createdTime:new Date(),
-        // tags:tags,
+        tags:tags,
         body:body,
         ankiOn:ankiOn,
 	});
     newNote.lastRevisedDate=newNote.createdTime;
-    console.log(req.body);
-    console.log(newNote);
     newNote.save();
-    // console.log(newNote._id)
-    // console.log(typeof(userId))
-    // console.log(typeof(newNote._id))
     User.findById(userId,(err,user)=>{
-        user.notes.push(newNote._id)
-        //user.tags.push(newNote.tags)
-        user.save()
-    });
-    User.findById(userId,(err,user)=>{
-        user.urls.push(url)
-        //user.tags.push(newNote.tags)
+        user.notes.push(newNote._id);
+        user.urls.push(url);
+        let newTags=user.tags;
+        for(let i=0;i<newNote.tags.length;i++)
+        {
+                newTags.push(newNote.tags[i]);
+        }
+        let a2= Array.from(new Set(newTags));
+        user.tags=a2;
         user.save();
     });
     res.json("success");
 }); 
 
 
+
 // post update 
+
 router.post('/updateNote/:idA',(req,res)=>{
 
-    const {difficulty,title,ankiOn,body} = req.body;
+      const {difficulty,title,tags,ankiOn,body} = req.body;
       let id = req.params.idA;
       console.log(id);
-      console.log(req.body);
       Note.findById(id, (err, notes)=> {
       if (err){
         console.log(err);
       }
       else{
         console.log("Result : ", notes);
-
         if(notes.ankiOn==false && ankiOn==true)
         {
             notes.repetitions=0;
@@ -175,87 +174,39 @@ router.post('/updateNote/:idA',(req,res)=>{
             notes.lastRevisedDate=new Date();
         }
         notes.title=title;
-        // notes.tags=tags;
+        notes.tags=tags;
         notes.difficulty=difficulty;
         notes.ankiOn=ankiOn;
         notes.body=body;
 
-        notes.save();
-        console.log(`new note : ${notes}`);
-        res.json("success");
-     }
+        User.findById(req.user._id, (err, users)=> {
+            if (err){
+                console.log(err);
+            }
+            else
+            {
+                console.log("...........");
+                console.log(users);
+                let newTags=users.tags;
+                console.log(newTags);
+                for(let i=0;i<tags.length;i++)
+                {
+                        newTags.push(tags[i]);
+                }
+                let a2= Array.from(new Set(newTags));
+                console.log(a2);
+                users.tags=a2;
+                notes.save();
+                users.save();
+                console.log(notes);
+                res.send("success");
+            
+            }
+     
+       }); 
+    }
     });
 });
-
-
-// post update 
-// router.post('/updateNote/:idA',(req,res)=>{
-
-//     const {difficulty,title,tags,body} = req.body;
-//       let id = req.params.idA;
-//       console.log(id);
-//     //   const {url,difficulty,title,createdTime,tags} = req.body;
-//     // const userId = req.user._id;
-//     // const newNote = new Note({
-// 	// 	userId:userId,
-//     //     url:url,
-//     //     difficulty:difficulty,
-//     //     title:title,
-//     //     createdTime:createdTime,
-//     //     tags:tags,
-//     //     visitCnt:visitCnt,
-// 	// });
-//     // console.log(newNote);
-//     // newNote.save();
-     
-//      Note.findOneAndUpdate(
-//         { id: id },
-//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
-//         (err, data) => {
-//             if(err) throw err;
-//             else{
-//             console.log(data);   
-//          console.log('success');}
-//          });
-         
-     
-// });
-
-
-
-// router.post('/updateNote/:idA',(req,res)=>{
-
-//     const {difficulty,title,tags,ankiOn,body} = req.body;
-//       let id = req.params.idA;
-//       console.log(id);
-//       Note.findById(id, (err, notes)=> {
-//       if (err){
-//         console.log(err);
-//       }
-//       else{
-//         console.log("Result : ", notes);
-
-//         if(notes.ankiOn==false && ankiOn==true)
-//         {
-//             notes.repetitions=0;
-//             notes.previousEaseFactor=2.5;
-//             notes.previousInterval=0;
-//             notes.lastRevisedDate=new Date();
-//         }
-//         notes.title=title;
-//         notes.tags=tags;
-//         notes.difficulty=difficulty;
-//         notes.ankiOn=ankiOn;
-//         notes.body=body;
-
-        
-//        notes.save();
-        
-//        console.log(notes);
-//        res.send("success");
-//      }
-//     });
-// });
 
 
 
