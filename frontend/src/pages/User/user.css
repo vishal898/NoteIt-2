@@ -5,6 +5,7 @@
   margin-top: 5%;
   height: max-content;
   width: 500px;
+  border-radius: 15px;
 
   background-color: rgb(255, 255, 255);
   text-align: center;
@@ -37,6 +38,7 @@
   border: none;
   outline: 0;
   display: inline-block;
+  border-radius: 0 0 15px 15px;
 
   color: white;
   background: linear-gradient(to bottom right, #4b5291, #6a81e9);
