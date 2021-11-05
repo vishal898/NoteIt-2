@@ -130,7 +130,7 @@ export default function Notecard(props) {
             <Tags  className="buttonqs item" tagsList = {note.tags} />
             </div>
             <div className="item">
-            <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=> handleSaveChange(note._id)} >Save</Button>
+            <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=>{handleSaveChange(note._id)}}>Save</Button>
             </div>
           </div>     
         </Box>
