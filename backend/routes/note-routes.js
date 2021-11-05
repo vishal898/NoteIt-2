@@ -61,18 +61,18 @@ router.get('/getAnkiNotes',async(req,res)=>{
 
 
 
-router.get('/getNoteCount',async(req,res)=>{
-    const uid=req.user._id;
-    console.log(uid);
-    Note.find({userId:uid},(err,data)=>{
-        if(err)throw error;
+// router.get('/getNoteCount',async(req,res)=>{
+//     const uid=req.user._id;
+//     console.log(uid);
+//     Note.find({userId:uid},(err,data)=>{
+//         if(err)throw error;
 
        
 
-        res.json(note.length);
-        // console.log(data);
-    });
-});
+//         res.json(note.length);
+//         // console.log(data);
+//     });
+// });
 
 
 
@@ -149,7 +149,7 @@ router.post('/createNote',(req,res)=>{
 });
 
 
-// // post update 
+// post update 
 // router.post('/updateNote/:idA',(req,res)=>{
 
 //     const {difficulty,title,tags,body} = req.body;
@@ -181,6 +181,8 @@ router.post('/createNote',(req,res)=>{
          
      
 // });
+
+
 
 router.post('/updateNote/:idA',(req,res)=>{
 
@@ -294,7 +296,8 @@ router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
         notes.repetitions=repetitionn;
         notes.previousInterval=interval;
         notes.previousEaseFactor=easeFactor;
-
+        notes.lastRevisedDate=new Date();
+        console.log(repetitionn);
         notes.save();
         var date = new Date();
         
