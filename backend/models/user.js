@@ -21,9 +21,7 @@ const userSchema = new Schema({
             ref:'Note',
         },
     ],
-    tags:[
-       String
-    ]
+    tags:[String]
 });
 
 

@@ -21,7 +21,6 @@ export default function Tags(props) {
     setOpen(true);
     console.log(props.tagsList);
   }
-  
   const [isKeyReleased, setIsKeyReleased] = useState(false);
   const onChange = (e) => {
     const { value } = e.target;

@@ -27,6 +27,7 @@ import "./Demo.css"
 
 
 import Autocomplete from '@mui/material/Autocomplete';
+import { minWidth } from '@mui/system';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -177,8 +178,9 @@ export default function Demo() {
     
 
     return (
+        
         <div  style={{width:"1000px"}} >
-           <br /><br /><br /><br/>
+           
             <p align="center"  className="hnote">Your Notes</p>
             <br />
             <Stack
@@ -266,6 +268,7 @@ export default function Demo() {
             <br /><br /><br />
 
         </div>
+        
     )
 }
 

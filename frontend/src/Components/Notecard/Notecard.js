@@ -45,6 +45,20 @@ export default function Notecard(props) {
   const handleValuechange=(value)=>{
     note.body=value
   }
+
+  const handleAnkitext=()=>{
+    if(note.ankiOn)
+    {
+     
+      document.getElementById("b5").style.backgroundColor = "Green";
+      document.getElementById("b5").innerHTML = "On";
+    }
+    else{
+      document.getElementById("b5").style.backgroundColor = "Red";
+      document.getElementById("b5").innerHTML = "Off";
+    }
+
+  }
       const getInstance = (instance) => {
       // You can now store and manipulate the simplemde instance.
       // setMdeInstance(instance);
@@ -111,7 +125,7 @@ export default function Notecard(props) {
           <div className="bottom">
             <Box sx={{ width: "100%",height:"50px" }}>
             <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}} onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty);props.onClose(note.difficulty) }} dif={note.difficulty} /></Box>
-            <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
+            <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px"}} onClick={ankiOnOff} ></Button></div>
             <div className="item">
             <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
             </div>
