@@ -15,7 +15,6 @@ import axios from "axios";
 import { TextField } from '@mui/material';
 
 
-
 //import { sizeWidth } from '@mui/system';
 
 
@@ -126,11 +125,13 @@ const Create = () => {
     <Navbar/>
    <div className="central">
         <Box className="container"> 
-          
-            <TextField sx={{ width: "100%",height:"50px" }} id="titlefield" freesolo defaultValue ={note.title}    onChange={(event)=>{note.title = event.target.value; }} placeholder="Title Here"></TextField>
-           
+          <div className="Save">
+            <div className="title" id="titleid" >
+              <TextField id="titlefield"   onChange={(event)=>{note.title = event.target.value;}} placeholder="Title Here"></TextField>
+          </div>
+          </div>
           <br />
-          <div className="CodM"> 
+            
           <SimpleMDE
                onChange={onChange}
               options={{
@@ -145,29 +146,17 @@ const Create = () => {
                 showIcons: ['strikethrough', 'heading', 'code', 'table', 'horizontal-rule']
               }}
           />
-          </div>
-          {/* <div style={{ display: 'flex', justifyContent: 'center' }}> */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             {/* <Tags tagsList = {note.tags} className="item buttonq"/> */}
-            {/* <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
+            <Difficulty onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} className="item"/>
             <Button  className="item buttonq" onClick={()=>{handleSaveChange()}} >Save</Button>
               
 
-  
-            <button id="b5" onClick={ankiOnOff}>On</button> */}
-            <div className="bottom">
-            <Box sx={{ width: "100%",height:"50px" }}>
-            <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}}  onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} /></Box>
-            <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
-            <div className="item">
-            <Tags  className="buttonqs item" tagsList = {note.tags} />
-            </div>
-            <div className="item">
-            <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=> handleSaveChange(note._id)} >Save</Button>
-            </div>
-         
+            <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
+            <button id="b5" onClick={ankiOnOff}>On</button>
  
 
- 
+              
 
           </div>      
         </Box>  

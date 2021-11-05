@@ -14,7 +14,7 @@ const User = () => {
     
     setLoading(false);
   }, []);
- // console.log(user.notes.length)
+  //console.log(user.notes.length)
 
   if (isLoading) return "Loading...";
   else {

@@ -21,7 +21,7 @@ export default function Notecard(props) {
   const note = props.note;
   const [open, setOpen] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
-  
+  let tagsList;
  
   const handleOpen = () => {
     setOpen(true);
@@ -31,7 +31,7 @@ export default function Notecard(props) {
     setLoading(false);
   }, []);
   const handleSaveChange = (NID)=>{
-    console.log(note);
+    
     ( async()=>{
       const updatedNote = await axios.post(`http://localhost:5000/updateNote/${NID}`,note,{
           withCredentials:true,
@@ -127,7 +127,7 @@ export default function Notecard(props) {
             <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}} onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty);props.onClose(note.difficulty) }} dif={note.difficulty} /></Box>
             <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px"}} onClick={ankiOnOff} ></Button></div>
             <div className="item">
-            <Tags  className="buttonqs item" tagsList = {note.tags} />
+            <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
             </div>
             <div className="item">
             <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=>{handleSaveChange(note._id)}}>Save</Button>
@@ -136,6 +136,7 @@ export default function Notecard(props) {
         </Box>
       </Modal>
     </div>
+    
  </React.Fragment>
   );
 }

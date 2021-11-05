@@ -9,31 +9,88 @@ import Modal from '@mui/material/Modal';
 import "./Tags.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const tagList=["Cn","Os"];
+let tagsList;
 
-export default function Tags({tagsList}) {
+export default function Tags(props) {
 
+  let oldtags=props.tagsList;
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [tags,setTags] = useState(tagsList);
+ 
+ 
+  const handleOpen = () => { 
+    setOpen(true);
+    console.log(props.tagsList);
+  }
+  const [isKeyReleased, setIsKeyReleased] = useState(false);
+  const onChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+  
+
+  const onKeyDown = (e) => {
+    const { key } = e;
+    const trimmedInput = input.trim();
+  
+    if (key === ',' && trimmedInput.length && !tags.includes(trimmedInput)) {
+      e.preventDefault();
+      setTags(prevState => [...prevState, trimmedInput]);
+      setInput('');
+    }
+  
+    if (key === "Backspace" && !input.length && tags.length && isKeyReleased) {
+      const tagsCopy = [...tags];
+      const poppedTag = tagsCopy.pop();
+      e.preventDefault();
+      setTags(tagsCopy);
+      setInput(poppedTag);
+    }
+  
+    setIsKeyReleased(false);
+  };
+  
+  const onKeyUp = () => {
+    setIsKeyReleased(true);
+  }
+  
+
+  const [input, setInput] = useState('');
+  const [tags, setTags] = useState(props.tagsList);
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser]=useState();
+  
+
+
+  const handleClose = () =>{ 
+      setOpen(false);
+      tagsList=tags;
+      props.onChange(tagsList);
+  }
+
   
   useEffect(async () => {
-    const profile = await axios.get("http://localhost:5000/profile", 
+    const profile = await axios.get("http://localhost:5000/", 
       {withCredentials:true});
-    setUser(profile.data);
-   // setTags(profile.data.tags);
-    console.log(profile.data.tags)
-    setTags(profile.data.tags)
+    
+    //setTags(profile.data.tags);
+    
+    
+    
     setLoading(false);
+
+
+
   }, []);
 
-  console.log(tags);
+  
   const handleTagDelete = ()=>{
     console.log('deleted chip');
   }
+
+  const deleteTag = (index) => {
+    setTags(prevState => prevState.filter((tag, i) => i !== index))
+  }
+
+
 
   if (isLoading) return "Loading...";
   else {
@@ -46,34 +103,30 @@ export default function Tags({tagsList}) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="container">
+      <Box className="container">
 
-    <Stack spacing={3} sx={{ width: 500 }}>
+      <div className="container">
+      {tags.map((tag, index) => (
+      <div className="tag">
+        {tag}
+        <button onClick={() => deleteTag(index)}>x</button>
+      </div>
+      ))}
+          <input
+          value={input}
+          placeholder="Enter a tag"
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          onChange={onChange}
 
-      <Autocomplete
-         value = {tags}
-        multiple
-        id="tags-filled"
-        
-        options={tags.map((option) => option)}
-        onClick = {()=>{console.log('autocomplete clicked');}}
-        freeSolo
-        renderTags={(value, getTagProps) =>
-          value.map((option, index) => (
-            <Chip onClick = {handleTagDelete} variant="outlined" label={option} {...getTagProps({ index })} />
-          ))
-        }
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Tag List"
-            placeholder="Add tags"
-          value={tags}
+
+
           />
-        )}
-      />
-    </Stack>
-    <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",margin:"5px",height:"30px"}} onClick={handleClose}>Close</Button>
+          </div>
+
+
+
+          <Button  className=" buttonqs" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",margin:"5px",height:"30px"}} onClick={handleClose}>Close</Button>
     </Box>
     </Modal>
     </div>
