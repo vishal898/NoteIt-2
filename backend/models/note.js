@@ -26,12 +26,8 @@ const noteSchema = new Schema({
     visitCnt:{
         type:Number,
     },
-
-
-
     body:{
         type:String,
-        required: true,
     },
     ankiOn:{
         type:Boolean,
