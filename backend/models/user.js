@@ -15,8 +15,18 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
-    notes:[String],
-    tags:[String]
+    notes:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Note',
+        },
+    ],
+    tags:[
+       String
+    ],
+    urls:[
+       String
+    ]
 });
 
 
