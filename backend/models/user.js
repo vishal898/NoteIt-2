@@ -15,12 +15,7 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
-    notes:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:'Note',
-        },
-    ],
+    notes:[String],
     tags:[String]
 });
 

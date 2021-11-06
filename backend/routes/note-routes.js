@@ -123,6 +123,7 @@ router.post('/createNote',(req,res)=>{
     
     const {difficulty,title,body,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
+    console.log(userId);
     const newNote = new Note({
 		userId:userId,
         url:url,
@@ -141,9 +142,13 @@ router.post('/createNote',(req,res)=>{
     console.log(typeof(newNote._id))
    console.log(req.body);
     User.findById(userId,(err,user)=>{
-        user.notes.push(newNote._id)
+
+        let noteOldId=user.notes;
+        console.log(noteOldId);
+        noteOldId.push(newNote._id)
         //user.tags.push(newNote.tags)
 
+        user.notes=noteOldId;
 
 
         let newTags=user.tags;
@@ -158,8 +163,6 @@ router.post('/createNote',(req,res)=>{
             }
             
             let a2= Array.from(new Set(newTags));
-
-
 
 
             console.log(a2);
@@ -205,6 +208,7 @@ router.post('/createNote',(req,res)=>{
          
      
 // });
+
 
 
 
@@ -256,9 +260,7 @@ router.post('/updateNote/:idA',(req,res)=>{
                     {
                            newTags.push(tags[i]);
                     }
-                    
-
-                    
+                                        
                     let a2= Array.from(new Set(newTags));
 
                     console.log(a2);
@@ -279,15 +281,66 @@ router.post('/updateNote/:idA',(req,res)=>{
 
 
 
+
+
+
+
+
 // post delete 
 router.post('/deleteNote/:noteId',(req,res)=>{
     const NID = req.params.noteId;
     console.log(NID);
+    
     Note.findOneAndDelete({_id:NID},(err,data)=>{
         if(err)res.send(err);
+
+
+        const userId = data.userId;
+    console.log("*****");
+    console.log(userId);
+    console.log("*****");
+
+
+
+        User.findById(userId,(err,user)=>{
+
+            let currNote=user.notes;
+
+           
+
+             const index = currNote.indexOf(NID);
+             if (index > -1) {
+                currNote.splice(index, 1);
+                }
+
+            user.notes=currNote;
+            user.save();
+            
+        });
+
+
+
+
         res.send(`DELETED ${NID}`);
     });
     console.log('hit delete api');
+
+
+
+
+
+   
+
+
+
+    
+
+
+
+
+
+
+
 });
 
 router.get("/getTags",(req,res)=>{  
@@ -299,6 +352,21 @@ router.get("/getTags",(req,res)=>{
         res.json(data.tags);
     });
 });
+
+
+router.get("/getCnt/:uid",(req,res)=>{  
+	const UID = req.params.uid;
+    
+    // const UID = req.params.ID;
+	User.findById({_id:UID},(err,data)=>{
+        if(err)throw error;
+        res.json(data.notes.length);
+    });
+});
+
+
+
+
 
 
 router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
@@ -338,7 +406,7 @@ router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
                interval=previousIntervaln * previousEaseFactorn;
            interval=Math.round(interval);
            repetitionn++;
-           easeFactor=previousEaseFactorn* (0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))
+           easeFactor=previousEaseFactorn +(0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))
        }
        else if(quality<3)
        {
