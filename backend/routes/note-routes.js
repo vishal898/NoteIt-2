@@ -117,14 +117,12 @@ router.get('/getNote/:url',(req,res)=>{
 // });
 
 
-
 // post create 
 router.post('/createNote',(req,res)=>{
    
     
     const {difficulty,title,body,url,tags,ankiOn} = req.body;
     const userId = req.user._id;
-    console.log(userId);
     const newNote = new Note({
 		userId:userId,
         url:url,
@@ -136,30 +134,83 @@ router.post('/createNote',(req,res)=>{
         ankiOn:ankiOn,
 	});
     newNote.lastRevisedDate=newNote.createdTime;
+    console.log(newNote);
     newNote.save();
+    console.log(newNote._id)
+    console.log(typeof(userId))
+    console.log(typeof(newNote._id))
+   console.log(req.body);
     User.findById(userId,(err,user)=>{
-        user.notes.push(newNote._id);
-        user.urls.push(url);
-        let newTags=user.tags;
-        for(let i=0;i<newNote.tags.length;i++)
-        {
-                newTags.push(newNote.tags[i]);
-        }
-        let a2= Array.from(new Set(newTags));
-        user.tags=a2;
-        user.save();
-    });
-    res.json("success");
-}); 
+        user.notes.push(newNote._id)
+        //user.tags.push(newNote.tags)
 
+
+
+        let newTags=user.tags;
+
+            console.log(newTags);
+
+
+            
+            for(let i=0;i<newNote.tags.length;i++)
+            {
+                   newTags.push(newNote.tags[i]);
+            }
+            
+            let a2= Array.from(new Set(newTags));
+
+
+
+
+            console.log(a2);
+            user.tags=a2;
+        
+
+
+             user.save()
+    });
+    
+});
 
 
 // post update 
+// router.post('/updateNote/:idA',(req,res)=>{
+
+//     const {difficulty,title,tags,body} = req.body;
+//       let id = req.params.idA;
+//       console.log(id);
+//     //   const {url,difficulty,title,createdTime,tags} = req.body;
+//     // const userId = req.user._id;
+//     // const newNote = new Note({
+// 	// 	userId:userId,
+//     //     url:url,
+//     //     difficulty:difficulty,
+//     //     title:title,
+//     //     createdTime:createdTime,
+//     //     tags:tags,
+//     //     visitCnt:visitCnt,
+// 	// });
+//     // console.log(newNote);
+//     // newNote.save();
+     
+//      Note.findOneAndUpdate(
+//         { id: id },
+//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
+//         (err, data) => {
+//             if(err) throw err;
+//             else{
+//             console.log(data);   
+//          console.log('success');}
+//          });
+         
+     
+// });
+
 
 
 router.post('/updateNote/:idA',(req,res)=>{
 
-      const {difficulty,title,tags,ankiOn,body} = req.body;
+    const {difficulty,title,tags,ankiOn,body} = req.body;
       let id = req.params.idA;
       console.log(id);
       Note.findById(id, (err, notes)=> {
@@ -168,6 +219,7 @@ router.post('/updateNote/:idA',(req,res)=>{
       }
       else{
         console.log("Result : ", notes);
+
         if(notes.ankiOn==false && ankiOn==true)
         {
             notes.repetitions=0;
@@ -175,45 +227,55 @@ router.post('/updateNote/:idA',(req,res)=>{
             notes.previousInterval=0;
             notes.lastRevisedDate=new Date();
         }
+              
         notes.title=title;
         notes.tags=tags;
         notes.difficulty=difficulty;
         notes.ankiOn=ankiOn;
         notes.body=body;
 
+
+
         User.findById(req.user._id, (err, users)=> {
             if (err){
-                console.log(err);
+              console.log(err);
             }
             else
             {
-                console.log("...........");
-                console.log(users);
-                let newTags=users.tags;
-                console.log(newTags);
-                for(let i=0;i<tags.length;i++)
-                {
-                        newTags.push(tags[i]);
-                }
-                let a2= Array.from(new Set(newTags));
-                console.log(a2);
-                users.tags=a2;
-                notes.save();
-                users.save();
-                console.log(notes);
-                res.send("success");
+
+                    console.log("...........");
+                    console.log(users);
+
+                    let newTags=users.tags;
+
+                    console.log(newTags);
+
+
+                    
+                    for(let i=0;i<tags.length;i++)
+                    {
+                           newTags.push(tags[i]);
+                    }
+                    
+
+                    
+                    let a2= Array.from(new Set(newTags));
+
+                    console.log(a2);
+                    users.tags=a2;
+                    
+                    notes.save();
+                    users.save();
+                    console.log(notes);
+                    res.send("success");
             
             }
      
        }); 
     }
+
     });
 });
-
-
-
-
-
 
 
 
@@ -222,37 +284,8 @@ router.post('/deleteNote/:noteId',(req,res)=>{
     const NID = req.params.noteId;
    // const {userId}=req.body;
     console.log(NID);
-    
     Note.findOneAndDelete({_id:NID},(err,data)=>{
         if(err)res.send(err);
-
-
-        const userId = data.userId;
-    console.log("*****");
-    console.log(userId);
-    console.log("*****");
-
-
-
-        User.findById(userId,(err,user)=>{
-
-            let currNote=user.notes;
-
-           
-
-             const index = currNote.indexOf(NID);
-             if (index > -1) {
-                currNote.splice(index, 1);
-                }
-
-            user.notes=currNote;
-            user.save();
-            
-        });
-
-
-
-
         res.send(`DELETED ${NID}`);
         data.save();
         const userId=data.userId;
@@ -267,23 +300,6 @@ router.post('/deleteNote/:noteId',(req,res)=>{
     });
    
     console.log('hit delete api');
-
-
-
-
-
-   
-
-
-
-    
-
-
-
-
-
-
-
 });
 
 router.get("/getTags",(req,res)=>{  
@@ -295,21 +311,6 @@ router.get("/getTags",(req,res)=>{
         res.json(data.tags);
     });
 });
-
-
-router.get("/getCnt/:uid",(req,res)=>{  
-	const UID = req.params.uid;
-    
-    // const UID = req.params.ID;
-	User.findById({_id:UID},(err,data)=>{
-        if(err)throw error;
-        res.json(data.notes.length);
-    });
-});
-
-
-
-
 
 
 router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
@@ -349,7 +350,7 @@ router.post('/ankiUpdate/:idA/:qualityA', (req, res) => {
                interval=previousIntervaln * previousEaseFactorn;
            interval=Math.round(interval);
            repetitionn++;
-           easeFactor=previousEaseFactorn +(0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))
+           easeFactor=previousEaseFactorn* (0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))
        }
        else if(quality<3)
        {
