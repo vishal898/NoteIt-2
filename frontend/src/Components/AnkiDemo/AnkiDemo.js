@@ -104,13 +104,13 @@ export default function Demo() {
                 setSkipDBCall(true);
                 setData(nd);
                 setTableData(nd);
-                console.log(nd[0].body);
+                //console.log(nd[0].body);
                 const tt = [];
                 nd.forEach((n)=>{
                     tt.push(n.title);
                 });
                 setAvailTitles(tt);
-                console.log(tt);
+                //console.log(tt);
             })();
             
             ( async()=>{
@@ -178,7 +178,7 @@ export default function Demo() {
 
     return (
         <div  style={{width:"1000px"}} >
-           <br /><br /><br /><br/>
+           
             <p align="center"  className="hnotea">Revision</p>
             <br />
             <Stack

@@ -58,6 +58,7 @@ export default function CustomizedTables(props) {
   // else {
   return (
     <>
+    <div className="tabhta">
     {
       notes
       ?
@@ -66,7 +67,7 @@ export default function CustomizedTables(props) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead className="headtq">
           <TableRow>
-            <StyledTableCell style={{width: 15}}>Number</StyledTableCell>
+            <StyledTableCell style={{width: 15}}>Sr. No.</StyledTableCell>
             <StyledTableCell align="center">Title</StyledTableCell>
             <StyledTableCell align="center">Difficulty</StyledTableCell>
            
@@ -104,6 +105,7 @@ export default function CustomizedTables(props) {
       <div>isLoading</div>
      
     }
+    </div>
      
     </>
   );}

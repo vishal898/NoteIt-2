@@ -95,7 +95,7 @@ export default function Notecard(props) {
   return (
     <React.Fragment>
     <div>
-      <Button onClick={handleOpen}>{note.title}</Button>
+      <Button onClick={handleOpen}sx={{fontSize:"10pt"}}>{note.title}</Button>
       <Modal open={open} aria-labelledby="parent-modal-title" aria-describedby="parent-modal-description">  
         <Box className="container"> 
           

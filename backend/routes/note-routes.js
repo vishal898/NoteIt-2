@@ -282,11 +282,23 @@ router.post('/updateNote/:idA',(req,res)=>{
 // post delete 
 router.post('/deleteNote/:noteId',(req,res)=>{
     const NID = req.params.noteId;
+   // const {userId}=req.body;
     console.log(NID);
     Note.findOneAndDelete({_id:NID},(err,data)=>{
         if(err)res.send(err);
         res.send(`DELETED ${NID}`);
+        data.save();
+        const userId=data.userId;
+        User.findById(userId, (err, user)=> {
+            if (err){
+                console.log(err);
+              }
+              else{
+            user.notes.pull(NID);
+            user.save();}
+        })
     });
+   
     console.log('hit delete api');
 });
 
