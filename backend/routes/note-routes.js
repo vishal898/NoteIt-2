@@ -120,7 +120,6 @@ router.get('/getNote/:url',(req,res)=>{
 // });
 
 
-
 // post create 
 router.post('/createNote',(req,res)=>{
    
@@ -138,29 +137,83 @@ router.post('/createNote',(req,res)=>{
         ankiOn:ankiOn,
 	});
     newNote.lastRevisedDate=newNote.createdTime;
+    console.log(newNote);
     newNote.save();
+    console.log(newNote._id)
+    console.log(typeof(userId))
+    console.log(typeof(newNote._id))
+   console.log(req.body);
     User.findById(userId,(err,user)=>{
-        user.notes.push(newNote._id);
-        user.urls.push(url);
-        let newTags=user.tags;
-        for(let i=0;i<newNote.tags.length;i++)
-        {
-                newTags.push(newNote.tags[i]);
-        }
-        let a2= Array.from(new Set(newTags));
-        user.tags=a2;
-        user.save();
-    });
-    res.json("success");
-}); 
+        user.notes.push(newNote._id)
+        //user.tags.push(newNote.tags)
 
+
+
+        let newTags=user.tags;
+
+            console.log(newTags);
+
+
+            
+            for(let i=0;i<newNote.tags.length;i++)
+            {
+                   newTags.push(newNote.tags[i]);
+            }
+            
+            let a2= Array.from(new Set(newTags));
+
+
+
+
+            console.log(a2);
+            user.tags=a2;
+        
+
+
+             user.save()
+    });
+    
+});
 
 
 // post update 
+// router.post('/updateNote/:idA',(req,res)=>{
+
+//     const {difficulty,title,tags,body} = req.body;
+//       let id = req.params.idA;
+//       console.log(id);
+//     //   const {url,difficulty,title,createdTime,tags} = req.body;
+//     // const userId = req.user._id;
+//     // const newNote = new Note({
+// 	// 	userId:userId,
+//     //     url:url,
+//     //     difficulty:difficulty,
+//     //     title:title,
+//     //     createdTime:createdTime,
+//     //     tags:tags,
+//     //     visitCnt:visitCnt,
+// 	// });
+//     // console.log(newNote);
+//     // newNote.save();
+     
+//      Note.findOneAndUpdate(
+//         { id: id },
+//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
+//         (err, data) => {
+//             if(err) throw err;
+//             else{
+//             console.log(data);   
+//          console.log('success');}
+//          });
+         
+     
+// });
+
+
 
 router.post('/updateNote/:idA',(req,res)=>{
 
-      const {difficulty,title,ankiOn,body} = req.body;
+    const {difficulty,title,tags,ankiOn,body} = req.body;
       let id = req.params.idA;
       console.log(id);
       Note.findById(id, (err, notes)=> {
@@ -169,6 +222,7 @@ router.post('/updateNote/:idA',(req,res)=>{
       }
       else{
         console.log("Result : ", notes);
+
         if(notes.ankiOn==false && ankiOn==true)
         {
             notes.repetitions=0;
@@ -176,15 +230,18 @@ router.post('/updateNote/:idA',(req,res)=>{
             notes.previousInterval=0;
             notes.lastRevisedDate=new Date();
         }
+              
         notes.title=title;
         notes.tags=tags;
         notes.difficulty=difficulty;
         notes.ankiOn=ankiOn;
         notes.body=body;
 
+
+
         User.findById(req.user._id, (err, users)=> {
             if (err){
-                console.log(err);
+              console.log(err);
             }
             else
             {
@@ -208,6 +265,7 @@ router.post('/updateNote/:idA',(req,res)=>{
      
        }); 
     }
+
     });
 });
 
@@ -216,11 +274,23 @@ router.post('/updateNote/:idA',(req,res)=>{
 // post delete 
 router.post('/deleteNote/:noteId',(req,res)=>{
     const NID = req.params.noteId;
+   // const {userId}=req.body;
     console.log(NID);
     Note.findOneAndDelete({_id:NID},(err,data)=>{
         if(err)res.send(err);
         res.send(`DELETED ${NID}`);
+        data.save();
+        const userId=data.userId;
+        User.findById(userId, (err, user)=> {
+            if (err){
+                console.log(err);
+              }
+              else{
+            user.notes.pull(NID);
+            user.save();}
+        })
     });
+   
     console.log('hit delete api');
 });
 

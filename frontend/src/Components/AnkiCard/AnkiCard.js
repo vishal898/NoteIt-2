@@ -132,11 +132,11 @@ function ChildModal(props) {
 
 
     <div className="bottoma">
-        <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,1);}} >Very Easy</button>
-        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,2);}} >Easy</button>
+        <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,5);}} >Very Easy</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,4);}} >Easy</button>
         <button className="buttonq" onClick={()=>{  handleAnkiChange(data._id,3);}} >Medium</button>
-        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,4);}} >Hard</button>
-        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,5);}} >Very Hard</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,2);}} >Hard</button>
+        <button className="buttonq" onClick={()=>{ handleAnkiChange(data._id,1);}} >Very Hard</button>
     </div>
 
           

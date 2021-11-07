@@ -90,7 +90,7 @@ export default function CustomizedTables(props) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead className="headt">
           <TableRow>
-            <StyledTableCell style={{width: 15}}>Number</StyledTableCell>
+            <StyledTableCell style={{width: 15}}>Sr. No.</StyledTableCell>
             <StyledTableCell align="center">Title</StyledTableCell>
             <StyledTableCell align="center">Difficulty</StyledTableCell>
             <StyledTableCell align="center"> Delete </StyledTableCell>
@@ -115,12 +115,12 @@ export default function CustomizedTables(props) {
                     </Button>   
               </StyledTableCell>
               <StyledTableCell id="diff"align="center"  >{note.difficulty}</StyledTableCell>
-              <StyledTableCell align="center"> <Button
+              <StyledTableCell sx={{fontSize:"9pt"}} align="center" > <Button
                       onClick={ ()=>{
                         handleDeleteChange(note._id);
                       }}
-                      color="secondary"
-                    >DELETE</Button>   
+                      color="secondary" >
+                    DELETE</Button>   
                     </StyledTableCell>
             </StyledTableRow>
           ))}

@@ -6,7 +6,7 @@ const Anki = () => {
     <Navbar/>
     
     <section className="hero-section">
-      
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
       <AnkiDemo/>
       </section>
       

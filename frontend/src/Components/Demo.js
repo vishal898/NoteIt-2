@@ -89,6 +89,7 @@ export default function Demo() {
         console.log(filteredData);
         return filteredData;
         }
+        
     };
 
 
@@ -110,7 +111,6 @@ export default function Demo() {
                     tt.push(n.title);
                 });
                 setAvailTitles(tt);
-                console.log(tt);
             })();
             
             ( async()=>{
@@ -122,6 +122,14 @@ export default function Demo() {
             })();
         
         }
+        // else{
+        //     setSkipDBCall(true);
+        //     setData(null);
+        //     setTableData(null);
+        //     setAvailTitles(null);
+        //     setAvailTags(null);
+            
+        // }
         setTableData(filterData(data,filter));
     },[filter])
 
@@ -219,6 +227,7 @@ export default function Demo() {
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                     >
+                        if(availTags)
                     {availTags.map((availtag) => (
                         <MenuItem key={availtag} value={availtag}>
                         <Checkbox checked={tags.indexOf(availtag) > -1} />
