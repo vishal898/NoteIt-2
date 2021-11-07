@@ -59,12 +59,8 @@ const Create = () => {
       const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
           withCredentials:true,
       });  
-      
     })();
     
-   
-    console.log("............");
-    //console.log(x);
   }
 
   

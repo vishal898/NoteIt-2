@@ -5,33 +5,20 @@ import Navbar from '../../Components/Navbar/Navbar';
 import './user.css';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 const User = () => {
-  let noteCnt=0;
+
   const [isLoading, setLoading] = useState(true);
   const [user, setUser]=useState();
-  useEffect(async () => {
-    const profile = await axios.get("http://localhost:5000/profile", 
+  useEffect(()=>{
+    
+    ( async()=>{
+      const profile = await axios.get("http://localhost:5000/profile", 
       {withCredentials:true});
-    setUser(profile.data);
- 
-    setLoading(false);
+      setUser(profile.data[0]);
+      setLoading(false);
+    })();
+
   }, []);
 
-
-  // function getCnt()
-  // {
-
-  //     ( async()=>{
-  //     const updatedNote = await axios.post(`http://localhost:5000/getCnt/${user._id}`,note,{
-  //         withCredentials:true,
-  //     });    
-  //   })();
-  // }
-
-  let getCnt=0;
-
-  //console.log(user.notes.length)
-
-  
 
   if (isLoading) return "Loading...";
   else {
@@ -40,23 +27,18 @@ const User = () => {
     <Navbar/>
       <div className="middle" >
         <div className="card">
-      
           <h1 className="username"><li>&nbsp;&nbsp; {user.username}&nbsp;&nbsp;</li></h1>
           <p className="title" ><li>&nbsp;&nbsp;&nbsp; {user.email}&nbsp;&nbsp;&nbsp; </li></p>
           <h2 className="yourtag">Note Count</h2>
           <div className="cent">
-          <button className="buttonhome" onClick={getCnt}></button>
+          <button className="buttonhome" >{user.notes.length}</button>
           </div>
-
           <p><button className="loginbutton" ><a style={{color:'white'}} href="http://localhost:5000/logout">Logout</a></button></p>
         </div>
-      
-       
       </div>
     </>
   );
-}
-
+  }
 }
   
 export default User;
