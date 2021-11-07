@@ -75,10 +75,8 @@ const Create = () => {
       const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
           withCredentials:true,
       });  
-      
     })();
     
-    //console.log(x);
   }
 
   
@@ -159,7 +157,7 @@ const Create = () => {
             <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}}  onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} /></Box>
             <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
             <div className="item">
-            <Tags  className="buttonqs item" tagsList = {note.tags} />
+            <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
             </div>
             <div className="item">
             <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=> handleSaveChange(note._id)} >Save</Button>

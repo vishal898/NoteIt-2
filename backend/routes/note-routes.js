@@ -11,18 +11,6 @@ router.get('/',(req,res)=>{
 });
 
 
-// get read id 
-router.get('/getUid',async(req,res)=>{
-    const uid=req.user._id;
-    console.log(uid);
-    // Note.find({userId:uid},(err,data)=>{
-    //     if(err)throw error;
-    //     res.json(data);
-    //     // console.log(data);
-    // });
-});
-
-
 
 // get read 
 router.get('/getAllNotes',async(req,res)=>{
@@ -59,29 +47,6 @@ router.get('/getAnkiNotes',async(req,res)=>{
 });
 
 
-
-
-// router.get('/getNoteCount',async(req,res)=>{
-//     const uid=req.user._id;
-//     console.log(uid);
-//     Note.find({userId:uid},(err,data)=>{
-//         if(err)throw error;
-
-       
-
-//         res.json(note.length);
-//         // console.log(data);
-//     });
-// });
-
-
-
-
-
-
-
-
-
 router.get('/getNote/:url',(req,res)=>{
     if(req.user === undefined)  res.send(['loginERR']);
     else{
@@ -98,33 +63,11 @@ router.get('/getNote/:url',(req,res)=>{
     }
 });
 
-
-
-
-
-
-
-// // get by nodeid
-// router.get('/getNote/:idA',(req,res)=>{
-//       let id = req.params.idA;
-//       console.log(id);
-//       Note.findById(id, (err, notes)=> {
-//       if (err){
-//         console.log(err);
-
-//       }
-//       else{
-//         console.log("Result : ", notes);
-//         res.json(notes);
-//       }
-// });
-
-
 // post create 
 router.post('/createNote',(req,res)=>{
    
     
-    const {difficulty,title,body,url,ankiOn} = req.body;
+    const {difficulty,title,tags,body,url,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -144,72 +87,22 @@ router.post('/createNote',(req,res)=>{
     console.log(typeof(newNote._id))
    console.log(req.body);
     User.findById(userId,(err,user)=>{
-        user.notes.push(newNote._id)
-        //user.tags.push(newNote.tags)
-
-
-
+        user.notes.push(newNote._id);
+        user.urls.push(url);
         let newTags=user.tags;
-
-            console.log(newTags);
-
-
-            
-            for(let i=0;i<newNote.tags.length;i++)
-            {
-                   newTags.push(newNote.tags[i]);
-            }
-            
-            let a2= Array.from(new Set(newTags));
-
-
-
-
-            console.log(a2);
-            user.tags=a2;
+        console.log(newTags);
+        for(let i=0;i<newNote.tags.length;i++)
+        {
+            newTags.push(newNote.tags[i]);
+        }
         
-
-
-             user.save()
+        let a2= Array.from(new Set(newTags));
+        console.log(a2);
+        user.tags=a2;
+        user.save()
     });
     
 });
-
-
-// post update 
-// router.post('/updateNote/:idA',(req,res)=>{
-
-//     const {difficulty,title,tags,body} = req.body;
-//       let id = req.params.idA;
-//       console.log(id);
-//     //   const {url,difficulty,title,createdTime,tags} = req.body;
-//     // const userId = req.user._id;
-//     // const newNote = new Note({
-// 	// 	userId:userId,
-//     //     url:url,
-//     //     difficulty:difficulty,
-//     //     title:title,
-//     //     createdTime:createdTime,
-//     //     tags:tags,
-//     //     visitCnt:visitCnt,
-// 	// });
-//     // console.log(newNote);
-//     // newNote.save();
-     
-//      Note.findOneAndUpdate(
-//         { id: id },
-//         { $set: { tags:tags,difficulty:difficulty,title:title,body:body } },
-//         (err, data) => {
-//             if(err) throw err;
-//             else{
-//             console.log(data);   
-//          console.log('success');}
-//          });
-         
-     
-// });
-
-
 
 router.post('/updateNote/:idA',(req,res)=>{
 
@@ -260,12 +153,9 @@ router.post('/updateNote/:idA',(req,res)=>{
                 users.save();
                 console.log(notes);
                 res.json("success");
-            
             }
-     
        }); 
     }
-
     });
 });
 
