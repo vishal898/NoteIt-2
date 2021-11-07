@@ -83,16 +83,19 @@ router.get('/getAnkiNotes',async(req,res)=>{
 
 
 router.get('/getNote/:url',(req,res)=>{
-    const userId = req.user._id;
-    const {url} = req.params;
-    console.log('getnote started');
-    console.log(url);
-    console.log(userId);
-    console.log('getnote finished');
-    Note.find({url:url,userId:userId},(err,data)=>{
-        if(err)throw error;
-        res.json(data);
-    });
+    if(req.user === undefined)  res.send(['loginERR']);
+    else{
+        const userId = req.user._id;
+        const {url} = req.params;
+        console.log('getnote started');
+        console.log(url);
+        console.log(userId);        
+        console.log('getnote finished');
+        Note.find({url:url,userId:userId},(err,data)=>{
+            if(err)throw error;
+            res.json(data);
+        });
+    }
 });
 
 
@@ -122,7 +125,7 @@ router.get('/getNote/:url',(req,res)=>{
 router.post('/createNote',(req,res)=>{
    
     
-    const {difficulty,title,body,url,tags,ankiOn} = req.body;
+    const {difficulty,title,body,url,ankiOn} = req.body;
     const userId = req.user._id;
     const newNote = new Note({
 		userId:userId,
@@ -157,7 +160,7 @@ router.post('/createNote',(req,res)=>{
 
 router.post('/updateNote/:idA',(req,res)=>{
 
-      const {difficulty,title,tags,ankiOn,body} = req.body;
+      const {difficulty,title,ankiOn,body} = req.body;
       let id = req.params.idA;
       console.log(id);
       Note.findById(id, (err, notes)=> {
@@ -199,7 +202,7 @@ router.post('/updateNote/:idA',(req,res)=>{
                 notes.save();
                 users.save();
                 console.log(notes);
-                res.send("success");
+                res.json("success");
             
             }
      

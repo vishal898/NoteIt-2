@@ -105,7 +105,6 @@ export default function Demo() {
                 setSkipDBCall(true);
                 setData(nd);
                 setTableData(nd);
-                console.log(nd[0].body);
                 const tt = [];
                 nd.forEach((n)=>{
                     tt.push(n.title);
