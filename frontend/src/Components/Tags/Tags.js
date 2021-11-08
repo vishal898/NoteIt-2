@@ -107,12 +107,13 @@ export default function Tags(props) {
 
       <div className="container">
       {tags.map((tag, index) => (
-      <div className="tag">
+      <div className="tag" >
         {tag}
-        <button onClick={() => deleteTag(index)}>x</button>
+        <button sx={{float:"right"}} onClick={() => deleteTag(index)}>x</button>
       </div>
       ))}
           <input
+          
           value={input}
           placeholder="Enter a tag"
           onKeyDown={onKeyDown}
