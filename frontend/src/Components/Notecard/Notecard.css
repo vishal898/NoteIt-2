@@ -52,7 +52,7 @@
   border-radius: 15px;
   color: #ffffff;
   cursor: pointer;
-  font-size: 16px;
+
   font-weight: 500;
 
   padding: 0 1rem;
@@ -93,4 +93,7 @@
 .CodeM {
   max-height: 450px;
   overflow-y: auto;
+}
+#b5 {
+  background: linear-gradient(to bottom right, #4b5291, #6a81e9);
 }
