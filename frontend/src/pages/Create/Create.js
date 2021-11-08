@@ -13,24 +13,8 @@ import "easymde/dist/easymde.min.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField } from '@mui/material';
-
-
-
+import { useHistory } from 'react-router-dom';
 //import { sizeWidth } from '@mui/system';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -47,7 +31,7 @@ const Create = () => {
   const [note, setFilter] = useState({
     title:"",
     body:"",
-    difficulty: "",
+    difficulty: "easy",
     tags:[],
     url:"none",
     createdTime:new Date(),
@@ -75,10 +59,8 @@ const Create = () => {
       const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
           withCredentials:true,
       });  
-      
     })();
     
-    //console.log(x);
   }
 
   
@@ -112,6 +94,20 @@ const Create = () => {
   }
 
 
+  function Appi() {
+    let history = useHistory();
+  
+    const redirect = () => {
+      handleSaveChange(note._id);
+      history.push('/home')
+    }
+  
+    return (
+      <div>
+        <button id="saveb" className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={redirect}>Save</button>
+      </div>
+    )
+  }
   
   
       
@@ -159,10 +155,11 @@ const Create = () => {
             <Difficulty sx={{ color:"black",padding:" 0 12px",borderRadius:"32px"}}  onChange = {(value)=>{ console.log(note.difficulty); note.difficulty = value; console.log(note.difficulty); }} dif={note.difficulty} /></Box>
             <div><Button id="b5" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px",height:"30px",width:"50px",backgroundColor:"red"}} onClick={ankiOnOff}>Off</Button></div>
             <div className="item">
-            <Tags  className="buttonqs item" tagsList = {note.tags} />
+            <Tags  className="buttonqs item" tagsList = {note.tags} onChange={(value)=>{console.log(value);note.tags=value}}/>
             </div>
             <div className="item">
-            <Button  className=" buttonqs item" sx={{ color:"white",padding:" 0 12px",borderRadius:"32px"}} onClick={()=> handleSaveChange(note._id)} >Save</Button>
+            
+            <Appi/>
             </div>
          
  

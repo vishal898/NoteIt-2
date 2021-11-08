@@ -35,32 +35,7 @@ router.get(
 		res.redirect("http://localhost:3000/home");
 	}
 );
-// router.get("/profile", function (req, res) {
-// 	User.findOne({ email: req.session.passport.user.email })
-// 	  .lean()
-// 	  .exec((err, user) => {
-// 		if (err) console.log(err);
-// 		if (user) res.status(200).send(user);
-// 		else {
-// 		  res.status(404).send();
-// 		}
-// 	  });
-//   });
-  router.get("/profile", (req, res)=> {
-	console.log(req.user);
-	res.status(200).json(req.user);
-	// User.findOne({ email: req.session.passport.user.email })
-	//   .lean()
-	//   .exec((err, user) => {
-	// 	  console.log(req.session.passport.user);
-	// 	  res.status(200).send(req.session.passport.user);
-	// 	// if (err) console.log(err);
-	// 	// if (user) res.status(200).send(user);
-	// 	// else {
-	// 	//   res.status(404).send();
-	// 	// }
-	//   });
-});
+
 
 router.get("/logout", (req, res) => {
 	// req.session = null;
@@ -74,18 +49,11 @@ router.get("/logout", (req, res) => {
 
 router.get("/profile", (req, res)=> {
 	console.log(req.user);
-	res.status(200).json(req.user);
-	// User.findOne({ email: req.session.passport.user.email })
-	//   .lean()
-	//   .exec((err, user) => {
-	// 	  console.log(req.session.passport.user);
-	// 	  res.status(200).send(req.session.passport.user);
-	// 	// if (err) console.log(err);
-	// 	// if (user) res.status(200).send(user);
-	// 	// else {
-	// 	//   res.status(404).send();
-	// 	// }
-	//   });
+	User.find({_id:req.user._id},(err,data)=>{
+		if(err)throw error;
+		console.log(`user from db ${data}`);
+		res.status(200).json(data);
+	});
 });
 
 

@@ -123,7 +123,8 @@ export default function Demo() {
         
         }
         setTableData(filterData(data,filter));
-    },[filter])
+        console.log('use effect called');
+    },[filter,skipDBCall])
 
 
 
@@ -247,13 +248,15 @@ export default function Demo() {
             <br/>
             <br/>
             <AnkiTable onChange = {(value)=>{
-                setTableData(value);
-                setData(value);
-                const tt = [];
-                value.forEach((n)=>{
-                    tt.push(n.title);
-                });
-                setAvailTitles(tt);
+                // setTableData(value);
+                // setData(value);
+                // const tt = [];
+                // value.forEach((n)=>{
+                //     tt.push(n.title);
+                // });
+                // setAvailTitles(tt);
+                console.log(value);
+                setSkipDBCall(false);
             }} notes = {tableData}/>
 
             

@@ -32,7 +32,7 @@ export default function Tags(props) {
     const { key } = e;
     const trimmedInput = input.trim();
   
-    if (key === ',' && trimmedInput.length && !tags.includes(trimmedInput)) {
+    if (key === "Enter" && trimmedInput.length && !tags.includes(trimmedInput)) {
       e.preventDefault();
       setTags(prevState => [...prevState, trimmedInput]);
       setInput('');

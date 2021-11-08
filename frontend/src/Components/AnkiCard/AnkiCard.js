@@ -47,6 +47,7 @@ function ChildModal(props) {
           withCredentials:true,
       });  
       console.log(updateAnki);
+      props.onChange('kala');
     })();
     
     closeBoth() ;
@@ -295,7 +296,7 @@ const AnkiCard = (props) => {
 
 
 
-          <ChildModal className="childmain1" closeBoth = {handleCloseP} note={data}/>
+          <ChildModal className="childmain1" closeBoth = {handleCloseP} onChange = {(value)=>{props.onChange(value);}} note={data}/>
         </Box>
       </Modal>
     </div>
