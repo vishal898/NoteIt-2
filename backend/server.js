@@ -34,6 +34,18 @@ app.use(cors(corsOptions));
 
 
 
+app.get("*", function (req, res) {
+	console.log(__dirname);
+
+	// VERY VERY IMPORTANT
+	res.sendFile(path.join(buildPath, "index.html"), function (err) {
+		if (err) {
+			res.status(500).send(err);
+		}
+	});
+});
+
+
 
 
 // Making cookie session
