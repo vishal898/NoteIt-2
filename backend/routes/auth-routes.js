@@ -27,12 +27,12 @@ router.get("/me", (req, res) => {
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		failureRedirect: "http://localhost:3000/bad",
+		failureRedirect: "https://noteit2021.herokuapp.com/bad",
 	}),
 	function (req, res) {
 		// Successful authentication, redirect home.
 		
-		res.redirect("http://localhost:3000/home");
+		res.redirect("https://noteit2021.herokuapp.com/home");
 	}
 );
 
@@ -43,7 +43,7 @@ router.get("/logout", (req, res) => {
 	req.session.destroy((err) => {
 		res.clearCookie("connect.sid");
 		// Don't redirect, just print text
-		res.redirect("http://localhost:3000");
+		res.redirect("https://noteit2021.herokuapp.com");
 	});
 });
 
