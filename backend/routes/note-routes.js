@@ -10,6 +10,11 @@ router.get('/',(req,res)=>{
     res.send('hello');
 });
 
+router.get('/check',(req,res)=>{
+    res.send('hello');
+});
+
+
 
 
 // get read 

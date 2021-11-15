@@ -4,6 +4,10 @@ const router = express.Router();
 const User = require("../models/user");
 
 
+
+
+
+
 router.get(
 	"/google",
 	passport.authenticate("google", { scope: ["profile", "email"] })
