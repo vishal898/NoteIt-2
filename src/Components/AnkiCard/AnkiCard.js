@@ -43,7 +43,7 @@ function ChildModal(props) {
     console.log(nid);
     console.log(quality);
     ( async()=>{
-      const updateAnki = await axios.post(`http://localhost:8000/ankiUpdate/${nid}/${quality}`,{
+      const updateAnki = await axios.post(`/ankiUpdate/${nid}/${quality}`,{
           withCredentials:true,
       });  
       console.log(updateAnki);

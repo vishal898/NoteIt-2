@@ -49,11 +49,11 @@ export default function CustomizedTables(props) {
   const handleDeleteChange = (noteId)=>{
     console.log(noteId);
     ( async()=>{
-        const delData = await axios.post(`http://localhost:8000/deleteNote/${noteId}`,{
+        const delData = await axios.post(`/deleteNote/${noteId}`,{
           withCredentials:true,
         });
         console.log(delData);
-        const notes = await axios.get('http://localhost:8000/getAllNotes',{
+        const notes = await axios.get('/getAllNotes',{
             withCredentials:true,
         });
         const nd = await notes.data;
