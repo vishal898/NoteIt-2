@@ -77,6 +77,8 @@ app.use(authRoutes);
 
 app.use(noteRoutes);
 
+app.use(express.static("public"));
+
 app.get('/',(req,res)=>{
     res.send('API IS RUNNING');
 })
