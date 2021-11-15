@@ -33,7 +33,7 @@ export default function Notecard(props) {
   const handleSaveChange = (NID)=>{
     
     ( async()=>{
-      const updatedNote = await axios.post(`http://localhost:5000/updateNote/${NID}`,note,{
+      const updatedNote = await axios.post(`http://localhost:8000/updateNote/${NID}`,note,{
           withCredentials:true,
       });    
     })();

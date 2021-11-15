@@ -97,7 +97,7 @@ export default function Demo() {
             console.log("DB CALL");
 
             ( async()=>{
-                const notes = await axios.get('http://localhost:5000/getAnkiNotes',{
+                const notes = await axios.get('http://localhost:8000/getAnkiNotes',{
                     withCredentials:true,
                 });
                 const nd = await notes.data;
@@ -114,7 +114,7 @@ export default function Demo() {
             })();
             
             ( async()=>{
-                const ts = await axios.get('http://localhost:5000/getTags',{
+                const ts = await axios.get('http://localhost:8000/getTags',{
                     withCredentials:true,
                 });  
                 const ut = await ts.data;

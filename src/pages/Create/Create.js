@@ -56,7 +56,7 @@ const Create = () => {
     //delete x._id;
 
     ( async()=>{
-      const updatedNote = await axios.post('http://localhost:5000/createNote',note,{
+      const updatedNote = await axios.post('http://localhost:8000/createNote',note,{
           withCredentials:true,
       });  
     })();

@@ -11,7 +11,7 @@ const User = () => {
   useEffect(()=>{
     
     ( async()=>{
-      const profile = await axios.get("http://localhost:5000/profile", 
+      const profile = await axios.get("http://localhost:8000/profile", 
       {withCredentials:true});
       setUser(profile.data[0]);
       setLoading(false);
@@ -33,7 +33,7 @@ const User = () => {
           <div className="cent">
           <button className="buttonhome" >{user.notes.length}</button>
           </div>
-          <p><button className="loginbutton" ><a style={{color:'white'}} href="http://localhost:5000/logout">Logout</a></button></p>
+          <p><button className="loginbutton" ><a style={{color:'white'}} href="http://localhost:8000/logout">Logout</a></button></p>
         </div>
       </div>
     </>

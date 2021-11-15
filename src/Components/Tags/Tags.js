@@ -68,7 +68,7 @@ export default function Tags(props) {
 
   
   useEffect(async () => {
-    const profile = await axios.get("http://localhost:5000/", 
+    const profile = await axios.get("http://localhost:8000/", 
       {withCredentials:true});
     
     //setTags(profile.data.tags);
