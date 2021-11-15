@@ -28,7 +28,7 @@ app.use(express.static(path.join(buildPath, "static")));
 
 dotenv.config({ path: './config.env' });
 const PORT  = process.env.PORT || 8000;
-var corsOptions={origin:'http://localhost:3000',credentials:true}
+var corsOptions={origin:'https://noteit2021.herokuapp.com',credentials:true}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
