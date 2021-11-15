@@ -19,12 +19,19 @@ const noteRoutes = require('./routes/note-routes');
 
 dbConnection.db();
 
+
+const buildPath = path.join(__dirname, '..', 'build');
+app.use(express.static(buildPath));
+app.use(express.static(path.join(buildPath, "static")));
+
+
 dotenv.config({ path: './config.env' });
-const PORT  = process.env.PORT;
+const PORT  = process.env.PORT || 5000;
 var corsOptions={origin:'http://localhost:3000',credentials:true}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
+
 
 
 
